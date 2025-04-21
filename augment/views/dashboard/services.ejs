@@ -1,0 +1,246 @@
+<div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900 mb-1">Services</h1>
+        <p class="text-gray-600">Gérez les services proposés par votre entreprise</p>
+    </div>
+    <div class="mt-4 md:mt-0">
+        <a href="/dashboard/services/new" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+            <i class="fas fa-plus mr-2"></i> Nouveau service
+        </a>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <% services.forEach(service => { %>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="relative">
+                <% if (service.image) { %>
+                    <img src="/uploads/<%= service.image %>" alt="<%= service.title %>" class="w-full h-48 object-cover">
+                <% } else { %>
+                    <div class="w-full h-48 bg-purple-100 flex items-center justify-center">
+                        <i class="<%= service.icon %> text-5xl text-purple-600"></i>
+                    </div>
+                <% } %>
+                
+                <% if (service.isPopular) { %>
+                    <div class="absolute top-0 right-0 bg-yellow-500 text-white px-3 py-1 text-xs font-semibold">
+                        Populaire
+                    </div>
+                <% } %>
+                
+                <div class="absolute top-0 left-0 m-4">
+                    <span class="px-2 py-1 text-xs rounded-full bg-white text-gray-800 shadow">
+                        <%= service.category.charAt(0).toUpperCase() + service.category.slice(1) %>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-xl font-semibold text-gray-900"><%= service.title %></h2>
+                    <div class="flex items-center">
+                        <span class="text-yellow-500 mr-1"><i class="fas fa-star"></i></span>
+                        <span class="text-gray-700"><%= service.ratingsAverage %></span>
+                    </div>
+                </div>
+                
+                <p class="text-gray-600 mb-4"><%= service.shortDescription %></p>
+                
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-2xl font-bold text-gray-900"><%= service.price.toLocaleString('fr-FR') %> €</div>
+                    <div class="text-sm text-gray-500"><%= service.duration.value %> <%= service.duration.unit %></div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4">
+                    <div class="flex justify-between">
+                        <div class="flex space-x-2">
+                            <a href="/dashboard/services/<%= service._id %>" class="text-purple-600 hover:text-purple-900">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/dashboard/services/<%= service._id %>/edit" class="text-blue-600 hover:text-blue-900">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button class="text-red-600 hover:text-red-900 delete-service" data-id="<%= service._id %>">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex space-x-2">
+                            <button class="toggle-popular" data-id="<%= service._id %>" title="<%= service.isPopular ? 'Retirer des populaires' : 'Marquer comme populaire' %>">
+                                <i class="fas fa-star text-<%= service.isPopular ? 'yellow' : 'gray' %>-500"></i>
+                            </button>
+                            <button class="toggle-active" data-id="<%= service._id %>" title="<%= service.isActive ? 'Désactiver' : 'Activer' %>">
+                                <i class="fas fa-<%= service.isActive ? 'toggle-on text-green' : 'toggle-off text-gray' %>-500"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+    
+    <% if (services.length === 0) { %>
+        <div class="col-span-full bg-white rounded-lg shadow-md p-8 text-center">
+            <i class="fas fa-info-circle text-blue-500 text-4xl mb-4"></i>
+            <h3 class="text-xl font-medium text-gray-900 mb-2">Aucun service trouvé</h3>
+            <p class="text-gray-500 mb-6">Vous n'avez pas encore créé de services. Commencez par en ajouter un nouveau.</p>
+            <a href="/dashboard/services/new" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                <i class="fas fa-plus mr-2"></i> Nouveau service
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<% if (pagination.pages > 1) { %>
+    <div class="flex justify-center mt-8">
+        <nav class="flex items-center space-x-2">
+            <% if (pagination.page > 1) { %>
+                <a href="?page=<%= pagination.page - 1 %>" class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            <% } %>
+            
+            <% for (let i = 1; i <= pagination.pages; i++) { %>
+                <a href="?page=<%= i %>" class="px-3 py-1 border <%= pagination.page === i ? 'bg-purple-600 text-white' : 'border-gray-300 text-gray-700 hover:bg-gray-50' %> rounded-md text-sm">
+                    <%= i %>
+                </a>
+            <% } %>
+            
+            <% if (pagination.page < pagination.pages) { %>
+                <a href="?page=<%= pagination.page + 1 %>" class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            <% } %>
+        </nav>
+    </div>
+<% } %>
+
+<!-- Modal de confirmation de suppression -->
+<div id="delete-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg max-w-md w-full p-6">
+        <div class="text-center">
+            <i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Confirmer la suppression</h3>
+            <p class="text-gray-500 mb-6">Êtes-vous sûr de vouloir supprimer ce service ? Cette action est irréversible.</p>
+        </div>
+        <div class="flex justify-center space-x-4">
+            <button id="cancel-delete" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                Annuler
+            </button>
+            <button id="confirm-delete" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Supprimer
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Suppression de service
+        const deleteButtons = document.querySelectorAll('.delete-service');
+        const deleteModal = document.getElementById('delete-modal');
+        const cancelDelete = document.getElementById('cancel-delete');
+        const confirmDelete = document.getElementById('confirm-delete');
+        let serviceToDelete = null;
+        
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                serviceToDelete = this.getAttribute('data-id');
+                deleteModal.classList.remove('hidden');
+            });
+        });
+        
+        cancelDelete.addEventListener('click', function() {
+            deleteModal.classList.add('hidden');
+            serviceToDelete = null;
+        });
+        
+        confirmDelete.addEventListener('click', function() {
+            if (serviceToDelete) {
+                fetch(`/api/v1/services/${serviceToDelete}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        throw new Error('Erreur lors de la suppression du service');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue lors de la suppression du service.');
+                })
+                .finally(() => {
+                    deleteModal.classList.add('hidden');
+                    serviceToDelete = null;
+                });
+            }
+        });
+        
+        // Fermer le modal en cliquant à l'extérieur
+        deleteModal.addEventListener('click', function(e) {
+            if (e.target === deleteModal) {
+                deleteModal.classList.add('hidden');
+                serviceToDelete = null;
+            }
+        });
+        
+        // Toggle service populaire
+        const togglePopularButtons = document.querySelectorAll('.toggle-popular');
+        
+        togglePopularButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const serviceId = this.getAttribute('data-id');
+                
+                fetch(`/api/v1/services/${serviceId}/toggle-popular`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        throw new Error('Erreur lors de la modification du service');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue lors de la modification du service.');
+                });
+            });
+        });
+        
+        // Toggle service actif
+        const toggleActiveButtons = document.querySelectorAll('.toggle-active');
+        
+        toggleActiveButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const serviceId = this.getAttribute('data-id');
+                
+                fetch(`/api/v1/services/${serviceId}/toggle-active`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        throw new Error('Erreur lors de la modification du service');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue lors de la modification du service.');
+                });
+            });
+        });
+    });
+</script>

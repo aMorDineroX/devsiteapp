@@ -1,0 +1,239 @@
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Projets en cours</p>
+                <h3 class="text-2xl font-bold mt-2"><%= stats.activeProjects %></h3>
+                <p class="text-green-500 text-xs mt-2">+<%= stats.newProjects %> cette semaine</p>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                <i class="fas fa-project-diagram"></i>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Tâches complétées</p>
+                <h3 class="text-2xl font-bold mt-2"><%= stats.completedTasks %></h3>
+                <p class="text-green-500 text-xs mt-2">+<%= stats.newCompletedTasks %> cette semaine</p>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                <i class="fas fa-check-circle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Revenus ce mois</p>
+                <h3 class="text-2xl font-bold mt-2"><%= stats.currencySymbol %><%= stats.monthlyRevenue.toLocaleString() %></h3>
+                <p class="<%= stats.revenueChangePercentage >= 0 ? 'text-green-500' : 'text-red-500' %> text-xs mt-2"><%= stats.revenueChangePercentage >= 0 ? '+' : '' %><%= stats.revenueChangePercentage %>% vs dernier mois</p>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Clients actifs</p>
+                <h3 class="text-2xl font-bold mt-2"><%= stats.activeClients %></h3>
+                <p class="text-green-500 text-xs mt-2">+<%= stats.newClients %> nouveaux</p>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Revenue Chart -->
+    <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg font-semibold">Revenus mensuels</h2>
+            <div class="flex space-x-2">
+                <button class="px-3 py-1 text-xs bg-purple-100 text-purple-600 rounded-full">2023</button>
+                <button class="px-3 py-1 text-xs bg-gray-100 text-gray-600 rounded-full">2022</button>
+            </div>
+        </div>
+        <div class="h-64">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Project Status Chart -->
+    <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg font-semibold">Statut des projets</h2>
+            <a href="/projects" class="text-purple-600 text-sm font-medium">Voir tout</a>
+        </div>
+        <div class="h-64">
+            <canvas id="projectStatusChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Projects & Tasks -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Recent Projects -->
+    <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg font-semibold">Projets récents</h2>
+            <a href="/projects" class="text-purple-600 text-sm font-medium">Voir tout</a>
+        </div>
+        <div class="space-y-4">
+            <% if (recentProjects && recentProjects.length > 0) { %>
+                <% recentProjects.forEach(project => { %>
+                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition duration-200">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-<%= getProjectIconColor(project.category) %>-100 flex items-center justify-center text-<%= getProjectIconColor(project.category) %>-600">
+                                <i class="<%= getProjectIcon(project.category) %>"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium"><%= project.name %></h4>
+                                <p class="text-xs text-gray-500">Dernière mise à jour: <%= formatTimeAgo(project.updatedAt) %></p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-<%= getStatusColor(project.status) %>-100 text-<%= getStatusColor(project.status) %>-800 text-xs rounded-full"><%= project.status %></span>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="p-6 text-center text-gray-500">
+                    Aucun projet récent à afficher.
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Recent Tasks -->
+    <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg font-semibold">Tâches à faire</h2>
+            <a href="/tasks" class="text-purple-600 text-sm font-medium">Voir tout</a>
+        </div>
+        <div class="space-y-4">
+            <% if (pendingTasks && pendingTasks.length > 0) { %>
+                <% pendingTasks.forEach(task => { %>
+                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition duration-200">
+                        <div class="flex items-center space-x-3">
+                            <form action="/tasks/<%= task._id %>/toggle" method="POST" class="task-toggle-form">
+                                <input type="checkbox" name="completed" class="rounded text-purple-600 task-checkbox" data-task-id="<%= task._id %>">
+                            </form>
+                            <div>
+                                <h4 class="font-medium"><%= task.name %></h4>
+                                <p class="text-xs text-gray-500">Projet: <%= task.project.name %> • Échéance: <%= formatDate(task.dueDate) %></p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <% if (task.assignedTo && task.assignedTo.firstName) { %>
+                                <span class="w-6 h-6 rounded-full bg-<%= getRandomColor(task.assignedTo._id) %> text-white flex items-center justify-center text-xs" title="<%= task.assignedTo.firstName %> <%= task.assignedTo.lastName %>">
+                                    <%= task.assignedTo.firstName.charAt(0) %><%= task.assignedTo.lastName.charAt(0) %>
+                                </span>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="p-6 text-center text-gray-500">
+                    Aucune tâche à faire pour le moment.
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: <%= JSON.stringify(charts.revenue.labels) %>,
+                datasets: [{
+                    label: 'Revenus',
+                    data: <%= JSON.stringify(charts.revenue.data) %>,
+                    backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                    borderColor: 'rgba(124, 58, 237, 1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Project Status Chart
+        const projectStatusCtx = document.getElementById('projectStatusChart').getContext('2d');
+        const projectStatusChart = new Chart(projectStatusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: <%= JSON.stringify(charts.projectStatus.labels) %>,
+                datasets: [{
+                    data: <%= JSON.stringify(charts.projectStatus.data) %>,
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 1)',  // terminé
+                        'rgba(124, 58, 237, 1)',   // en cours
+                        'rgba(245, 158, 11, 1)',   // en revue
+                        'rgba(156, 163, 175, 1)'   // en attente
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    }
+                }
+            }
+        });
+
+        // Task checkbox toggle
+        const taskCheckboxes = document.querySelectorAll('.task-checkbox');
+        taskCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const form = this.closest('form');
+                if (form) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>

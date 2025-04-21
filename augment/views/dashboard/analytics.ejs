@@ -1,0 +1,350 @@
+<div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900 mb-1">Analytiques</h1>
+        <p class="text-gray-600">Visualisez les performances de votre entreprise</p>
+    </div>
+    <div class="mt-4 md:mt-0 flex space-x-3">
+        <div class="relative">
+            <select id="period-filter" class="appearance-none bg-white border border-gray-300 rounded-lg py-2 px-4 pr-8 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <option value="month">Ce mois</option>
+                <option value="quarter">Ce trimestre</option>
+                <option value="year">Cette année</option>
+                <option value="all">Tout</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+        </div>
+        <button id="export-report" class="inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+            <i class="fas fa-download mr-2"></i> Exporter
+        </button>
+    </div>
+</div>
+
+<!-- Vue d'ensemble -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <!-- Carte 1: Projets -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-700">Projets</h2>
+            <div class="bg-blue-100 p-2 rounded-full">
+                <i class="fas fa-project-diagram text-blue-600"></i>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Actifs</span>
+                <span class="text-gray-900 font-medium"><%= overview.projectStats.find(s => s._id === 'en cours')?.count || 0 %></span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Terminés</span>
+                <span class="text-gray-900 font-medium"><%= overview.projectStats.find(s => s._id === 'terminé')?.count || 0 %></span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Total</span>
+                <span class="text-gray-900 font-medium"><%= overview.projectStats.reduce((acc, curr) => acc + curr.count, 0) %></span>
+            </div>
+            <div class="pt-2 border-t border-gray-200">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Montant total</span>
+                    <span class="text-gray-900 font-bold"><%= overview.projectStats.reduce((acc, curr) => acc + curr.totalAmount, 0).toLocaleString('fr-FR') %> €</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Carte 2: Commandes -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-700">Commandes</h2>
+            <div class="bg-green-100 p-2 rounded-full">
+                <i class="fas fa-shopping-cart text-green-600"></i>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Payées</span>
+                <span class="text-gray-900 font-medium"><%= overview.orderStats.find(s => s._id === 'payée')?.count || 0 %></span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">En attente</span>
+                <span class="text-gray-900 font-medium"><%= overview.orderStats.find(s => s._id === 'en attente')?.count || 0 %></span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Total</span>
+                <span class="text-gray-900 font-medium"><%= overview.orderStats.reduce((acc, curr) => acc + curr.count, 0) %></span>
+            </div>
+            <div class="pt-2 border-t border-gray-200">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Revenus</span>
+                    <span class="text-gray-900 font-bold"><%= (overview.orderStats.find(s => s._id === 'payée')?.totalAmount || 0).toLocaleString('fr-FR') %> €</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Carte 3: Services -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-700">Services</h2>
+            <div class="bg-purple-100 p-2 rounded-full">
+                <i class="fas fa-cogs text-purple-600"></i>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <% overview.serviceStats.forEach(stat => { %>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600"><%= stat._id.charAt(0).toUpperCase() + stat._id.slice(1) %></span>
+                    <span class="text-gray-900 font-medium"><%= stat.count %></span>
+                </div>
+            <% }) %>
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Total</span>
+                <span class="text-gray-900 font-medium"><%= overview.serviceStats.reduce((acc, curr) => acc + curr.count, 0) %></span>
+            </div>
+            <div class="pt-2 border-t border-gray-200">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Note moyenne</span>
+                    <span class="text-gray-900 font-bold flex items-center">
+                        <%= (overview.serviceStats.reduce((acc, curr) => acc + curr.avgRating * curr.count, 0) / overview.serviceStats.reduce((acc, curr) => acc + curr.count, 0)).toFixed(1) %>
+                        <i class="fas fa-star text-yellow-500 ml-1"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Carte 4: Utilisateurs -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-700">Utilisateurs</h2>
+            <div class="bg-orange-100 p-2 rounded-full">
+                <i class="fas fa-users text-orange-600"></i>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Clients</span>
+                <span class="text-gray-900 font-medium"><%= overview.userStats.find(s => s._id === 'client')?.count || 0 %></span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Administrateurs</span>
+                <span class="text-gray-900 font-medium"><%= overview.userStats.find(s => s._id === 'admin')?.count || 0 %></span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-gray-600">Total</span>
+                <span class="text-gray-900 font-medium"><%= overview.userStats.reduce((acc, curr) => acc + curr.count, 0) %></span>
+            </div>
+            <div class="pt-2 border-t border-gray-200">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Nouveaux ce mois</span>
+                    <span class="text-gray-900 font-bold">
+                        <% 
+                            const currentMonth = new Date().toISOString().slice(0, 7);
+                            const newUsers = overview.userStats.filter(s => s._id === 'client').length > 0 ? 
+                                overview.clientStats.filter(s => s._id.startsWith(currentMonth)).reduce((acc, curr) => acc + curr.count, 0) : 0;
+                        %>
+                        <%= newUsers %>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Graphique des revenus mensuels -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Revenus mensuels</h2>
+        <div class="h-80">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+    
+    <!-- Graphique des projets par statut -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Projets par statut</h2>
+        <div class="h-80">
+            <canvas id="projectStatusChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Top clients -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-700">Top clients</h2>
+            <a href="/dashboard/analytics/clients" class="text-sm text-purple-600 hover:text-purple-800">Voir tous</a>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Projets</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Montant</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <% overview.projectsByClient.slice(0, 5).forEach(client => { %>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                        <span class="text-purple-600 font-medium"><%= client.client.firstName.charAt(0) %><%= client.client.lastName.charAt(0) %></span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900"><%= client.client.firstName %> <%= client.client.lastName %></div>
+                                        <div class="text-sm text-gray-500"><%= client.client.email %></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= client.count %>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                <%= client.totalAmount.toLocaleString('fr-FR') %> €
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Activité récente -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-700">Activité récente</h2>
+        </div>
+        <div class="space-y-4">
+            <% activities.forEach(activity => { %>
+                <div class="flex items-start border-b border-gray-200 pb-4 last:border-0 last:pb-0">
+                    <div class="bg-<%= 
+                        activity.type === 'project' ? 'blue' : 
+                        activity.type === 'order' ? 'green' : 
+                        activity.type === 'user' ? 'orange' : 
+                        'gray' 
+                    %>-100 p-2 rounded-full mr-4">
+                        <i class="fas fa-<%= 
+                            activity.type === 'project' ? 'project-diagram' : 
+                            activity.type === 'order' ? 'shopping-cart' : 
+                            activity.type === 'user' ? 'user' : 
+                            'bell' 
+                        %> text-<%= 
+                            activity.type === 'project' ? 'blue' : 
+                            activity.type === 'order' ? 'green' : 
+                            activity.type === 'user' ? 'orange' : 
+                            'gray' 
+                        %>-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-900"><%= activity.message %></p>
+                        <p class="text-xs text-gray-500"><%= new Date(activity.date).toLocaleString('fr-FR') %></p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Graphique des revenus mensuels
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: <%= JSON.stringify(overview.monthlyRevenue.map(item => {
+                    const [year, month] = item._id.split('-');
+                    return `${month}/${year.slice(2)}`;
+                })) %>,
+                datasets: [{
+                    label: 'Revenus',
+                    data: <%= JSON.stringify(overview.monthlyRevenue.map(item => item.revenue)) %>,
+                    backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                    borderColor: 'rgba(124, 58, 237, 1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(context.raw);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumSignificantDigits: 3 }).format(value);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Graphique des projets par statut
+        const projectStatusCtx = document.getElementById('projectStatusChart').getContext('2d');
+        const projectStatusChart = new Chart(projectStatusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: <%= JSON.stringify(overview.projectStats.map(item => item._id.charAt(0).toUpperCase() + item._id.slice(1))) %>,
+                datasets: [{
+                    data: <%= JSON.stringify(overview.projectStats.map(item => item.count)) %>,
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.8)', // Bleu
+                        'rgba(245, 158, 11, 0.8)', // Jaune
+                        'rgba(124, 58, 237, 0.8)', // Violet
+                        'rgba(16, 185, 129, 0.8)', // Vert
+                        'rgba(239, 68, 68, 0.8)'   // Rouge
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        });
+        
+        // Filtre de période
+        const periodFilter = document.getElementById('period-filter');
+        
+        if (periodFilter) {
+            periodFilter.addEventListener('change', function() {
+                const period = this.value;
+                window.location.href = `/dashboard/analytics?period=${period}`;
+            });
+        }
+        
+        // Export du rapport
+        const exportButton = document.getElementById('export-report');
+        
+        if (exportButton) {
+            exportButton.addEventListener('click', function() {
+                alert('Fonctionnalité d\'export en cours de développement');
+                // TODO: Implémenter l'export du rapport en PDF ou Excel
+            });
+        }
+    });
+</script>

@@ -1,0 +1,295 @@
+<div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900 mb-1">Notifications</h1>
+        <p class="text-gray-600">Restez informé des dernières mises à jour</p>
+    </div>
+    <div class="mt-4 md:mt-0 flex space-x-3">
+        <button id="mark-all-read" class="inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+            <i class="fas fa-check-double mr-2"></i> Tout marquer comme lu
+        </button>
+        <button id="delete-all" class="inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+            <i class="fas fa-trash-alt mr-2"></i> Tout supprimer
+        </button>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+    <div class="p-4 border-b border-gray-200 bg-gray-50">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="relative mr-4">
+                    <select id="type-filter" class="appearance-none bg-white border border-gray-300 rounded-lg py-2 px-4 pr-8 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <option value="">Tous les types</option>
+                        <option value="info">Information</option>
+                        <option value="success">Succès</option>
+                        <option value="warning">Avertissement</option>
+                        <option value="error">Erreur</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <select id="read-filter" class="appearance-none bg-white border border-gray-300 rounded-lg py-2 px-4 pr-8 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <option value="">Toutes</option>
+                        <option value="unread">Non lues</option>
+                        <option value="read">Lues</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="divide-y divide-gray-200">
+        <% if (notifications.length === 0) { %>
+            <div class="p-8 text-center">
+                <i class="fas fa-bell-slash text-gray-400 text-5xl mb-4"></i>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Aucune notification</h3>
+                <p class="text-gray-500">Vous n'avez pas encore reçu de notifications.</p>
+            </div>
+        <% } else { %>
+            <% notifications.forEach(notification => { %>
+                <div class="notification-item p-4 hover:bg-gray-50 transition duration-150 <%= notification.isRead ? '' : 'bg-purple-50' %>">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="h-10 w-10 rounded-full flex items-center justify-center <%= 
+                                notification.type === 'info' ? 'bg-blue-100 text-blue-600' : 
+                                notification.type === 'success' ? 'bg-green-100 text-green-600' : 
+                                notification.type === 'warning' ? 'bg-yellow-100 text-yellow-600' : 
+                                'bg-red-100 text-red-600' 
+                            %>">
+                                <i class="fas fa-<%= 
+                                    notification.type === 'info' ? 'info-circle' : 
+                                    notification.type === 'success' ? 'check-circle' : 
+                                    notification.type === 'warning' ? 'exclamation-triangle' : 
+                                    'exclamation-circle' 
+                                %>"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-sm font-medium text-gray-900"><%= notification.title %></h3>
+                                <p class="text-xs text-gray-500"><%= new Date(notification.createdAt).toLocaleString('fr-FR') %></p>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1"><%= notification.message %></p>
+                            <% if (notification.link) { %>
+                                <a href="<%= notification.link %>" class="text-sm text-purple-600 hover:text-purple-800 mt-2 inline-block">
+                                    Voir les détails <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            <% } %>
+                        </div>
+                        <div class="ml-4 flex-shrink-0 flex space-x-2">
+                            <% if (!notification.isRead) { %>
+                                <button class="mark-read text-blue-600 hover:text-blue-800" data-id="<%= notification.id %>" title="Marquer comme lu">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            <% } %>
+                            <button class="delete-notification text-red-600 hover:text-red-800" data-id="<%= notification.id %>" title="Supprimer">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+    
+    <% if (pagination.pages > 1) { %>
+        <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="text-sm text-gray-500">
+                    Affichage de <span class="font-medium"><%= (pagination.page - 1) * pagination.limit + 1 %></span> à <span class="font-medium"><%= Math.min(pagination.page * pagination.limit, pagination.total) %></span> sur <span class="font-medium"><%= pagination.total %></span> notifications
+                </div>
+                <div class="flex space-x-2">
+                    <% if (pagination.page > 1) { %>
+                        <a href="?page=<%= pagination.page - 1 %>" class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                            Précédent
+                        </a>
+                    <% } %>
+                    
+                    <% if (pagination.page < pagination.pages) { %>
+                        <a href="?page=<%= pagination.page + 1 %>" class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                            Suivant
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<!-- Modal de confirmation de suppression -->
+<div id="delete-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg max-w-md w-full p-6">
+        <div class="text-center">
+            <i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Confirmer la suppression</h3>
+            <p class="text-gray-500 mb-6">Êtes-vous sûr de vouloir supprimer toutes les notifications ? Cette action est irréversible.</p>
+        </div>
+        <div class="flex justify-center space-x-4">
+            <button id="cancel-delete" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                Annuler
+            </button>
+            <button id="confirm-delete" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Supprimer
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Filtres
+        const typeFilter = document.getElementById('type-filter');
+        const readFilter = document.getElementById('read-filter');
+        
+        function applyFilters() {
+            const type = typeFilter.value;
+            const read = readFilter.value;
+            
+            let url = '/dashboard/notifications?';
+            if (type) url += `type=${type}&`;
+            if (read) url += `read=${read}&`;
+            
+            window.location.href = url;
+        }
+        
+        if (typeFilter) typeFilter.addEventListener('change', applyFilters);
+        if (readFilter) readFilter.addEventListener('change', applyFilters);
+        
+        // Marquer comme lu
+        const markReadButtons = document.querySelectorAll('.mark-read');
+        
+        markReadButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const notificationId = this.getAttribute('data-id');
+                
+                fetch(`/api/v1/notifications/${notificationId}/read`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        throw new Error('Erreur lors de la mise à jour de la notification');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue lors de la mise à jour de la notification.');
+                });
+            });
+        });
+        
+        // Marquer tout comme lu
+        const markAllReadButton = document.getElementById('mark-all-read');
+        
+        if (markAllReadButton) {
+            markAllReadButton.addEventListener('click', function() {
+                fetch('/api/v1/notifications/read-all', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        throw new Error('Erreur lors de la mise à jour des notifications');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue lors de la mise à jour des notifications.');
+                });
+            });
+        }
+        
+        // Supprimer une notification
+        const deleteButtons = document.querySelectorAll('.delete-notification');
+        
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const notificationId = this.getAttribute('data-id');
+                
+                if (confirm('Êtes-vous sûr de vouloir supprimer cette notification ?')) {
+                    fetch(`/api/v1/notifications/${notificationId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.reload();
+                        } else {
+                            throw new Error('Erreur lors de la suppression de la notification');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                        alert('Une erreur est survenue lors de la suppression de la notification.');
+                    });
+                }
+            });
+        });
+        
+        // Supprimer toutes les notifications
+        const deleteAllButton = document.getElementById('delete-all');
+        const deleteModal = document.getElementById('delete-modal');
+        const cancelDelete = document.getElementById('cancel-delete');
+        const confirmDelete = document.getElementById('confirm-delete');
+        
+        if (deleteAllButton) {
+            deleteAllButton.addEventListener('click', function() {
+                deleteModal.classList.remove('hidden');
+            });
+        }
+        
+        if (cancelDelete) {
+            cancelDelete.addEventListener('click', function() {
+                deleteModal.classList.add('hidden');
+            });
+        }
+        
+        if (confirmDelete) {
+            confirmDelete.addEventListener('click', function() {
+                fetch('/api/v1/notifications', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        throw new Error('Erreur lors de la suppression des notifications');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue lors de la suppression des notifications.');
+                })
+                .finally(() => {
+                    deleteModal.classList.add('hidden');
+                });
+            });
+        }
+        
+        // Fermer le modal en cliquant à l'extérieur
+        deleteModal.addEventListener('click', function(e) {
+            if (e.target === deleteModal) {
+                deleteModal.classList.add('hidden');
+            }
+        });
+    });
+</script>

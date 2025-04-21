@@ -1,0 +1,464 @@
+<div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900 mb-1">Messages</h1>
+        <p class="text-gray-600">Communiquez avec vos clients et collaborateurs</p>
+    </div>
+    <div class="mt-4 md:mt-0">
+        <button id="new-message-btn" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+            <i class="fas fa-plus mr-2"></i> Nouveau message
+        </button>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Liste des conversations -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+            <div class="p-4 border-b border-gray-200 bg-gray-50">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900">Conversations</h2>
+                    <div class="relative">
+                        <select id="conversation-filter" class="appearance-none bg-white border border-gray-300 rounded-lg py-2 px-4 pr-8 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm">
+                            <option value="active">Actives</option>
+                            <option value="archived">Archivées</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 relative">
+                    <input type="text" id="search-conversations" placeholder="Rechercher..." class="w-full px-4 py-2 pl-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <i class="fas fa-search text-gray-400 absolute left-3 top-3"></i>
+                </div>
+            </div>
+            
+            <div class="overflow-y-auto max-h-96">
+                <% if (conversations.length === 0) { %>
+                    <div class="p-8 text-center">
+                        <i class="fas fa-comments text-gray-400 text-5xl mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Aucune conversation</h3>
+                        <p class="text-gray-500">Commencez une nouvelle conversation pour communiquer avec vos clients ou collaborateurs.</p>
+                    </div>
+                <% } else { %>
+                    <% conversations.forEach(conversation => { %>
+                        <a href="/dashboard/messages/conversations/<%= conversation._id %>" class="conversation-item block p-4 hover:bg-gray-50 transition duration-150 border-b border-gray-200 last:border-0 <%= activeConversation && activeConversation._id.toString() === conversation._id.toString() ? 'bg-purple-50' : '' %>">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mr-3">
+                                    <% const otherParticipant = conversation.participants.find(p => p._id.toString() !== user.id); %>
+                                    <div class="relative">
+                                        <img src="<%= otherParticipant.profileImage ? `/uploads/${otherParticipant.profileImage}` : '/images/default-avatar.png' %>" alt="<%= otherParticipant.firstName %> <%= otherParticipant.lastName %>" class="w-10 h-10 rounded-full">
+                                        <% if (conversation.unreadCount.get(user.id.toString()) > 0) { %>
+                                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"><%= conversation.unreadCount.get(user.id.toString()) %></span>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-sm font-medium text-gray-900 truncate"><%= otherParticipant.firstName %> <%= otherParticipant.lastName %></h3>
+                                        <p class="text-xs text-gray-500"><%= new Date(conversation.lastMessageDate).toLocaleString('fr-FR', { hour: '2-digit', minute: '2-digit' }) %></p>
+                                    </div>
+                                    <% if (conversation.project) { %>
+                                        <p class="text-xs text-purple-600 mt-1">Projet: <%= conversation.project.name %></p>
+                                    <% } %>
+                                    <p class="text-sm text-gray-600 mt-1 truncate"><%= conversation.lastMessage ? conversation.lastMessage.content : 'Nouvelle conversation' %></p>
+                                </div>
+                            </div>
+                        </a>
+                    <% }) %>
+                <% } %>
+            </div>
+            
+            <% if (pagination.pages > 1) { %>
+                <div class="p-4 border-t border-gray-200 bg-gray-50">
+                    <div class="flex justify-center">
+                        <nav class="flex items-center space-x-2">
+                            <% if (pagination.page > 1) { %>
+                                <a href="?page=<%= pagination.page - 1 %>" class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            <% } %>
+                            
+                            <% for (let i = 1; i <= pagination.pages; i++) { %>
+                                <a href="?page=<%= i %>" class="px-3 py-1 border <%= pagination.page === i ? 'bg-purple-600 text-white' : 'border-gray-300 text-gray-700 hover:bg-gray-50' %> rounded-md text-sm">
+                                    <%= i %>
+                                </a>
+                            <% } %>
+                            
+                            <% if (pagination.page < pagination.pages) { %>
+                                <a href="?page=<%= pagination.page + 1 %>" class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            <% } %>
+                        </nav>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    
+    <!-- Conversation active -->
+    <div class="lg:col-span-3">
+        <% if (activeConversation) { %>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
+                <!-- En-tête de la conversation -->
+                <div class="p-4 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <% const otherParticipant = activeConversation.participants.find(p => p._id.toString() !== user.id); %>
+                        <img src="<%= otherParticipant.profileImage ? `/uploads/${otherParticipant.profileImage}` : '/images/default-avatar.png' %>" alt="<%= otherParticipant.firstName %> <%= otherParticipant.lastName %>" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900"><%= otherParticipant.firstName %> <%= otherParticipant.lastName %></h3>
+                            <p class="text-sm text-gray-500"><%= otherParticipant.role === 'admin' ? 'Administrateur' : 'Client' %></p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <% if (activeConversation.project) { %>
+                            <a href="/dashboard/projects/<%= activeConversation.project._id %>" class="text-purple-600 hover:text-purple-800" title="Voir le projet">
+                                <i class="fas fa-project-diagram"></i>
+                            </a>
+                        <% } %>
+                        <button class="text-gray-600 hover:text-gray-800 archive-conversation" data-id="<%= activeConversation._id %>" title="<%= activeConversation.isArchived ? 'Désarchiver' : 'Archiver' %>">
+                            <i class="fas fa-<%= activeConversation.isArchived ? 'box-open' : 'archive' %>"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Messages -->
+                <div id="messages-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+                    <% if (messages.length === 0) { %>
+                        <div class="text-center py-8">
+                            <i class="fas fa-comments text-gray-300 text-5xl mb-4"></i>
+                            <p class="text-gray-500">Aucun message dans cette conversation. Commencez à écrire ci-dessous.</p>
+                        </div>
+                    <% } else { %>
+                        <% messages.forEach(message => { %>
+                            <div class="message <%= message.sender._id.toString() === user.id ? 'flex justify-end' : 'flex justify-start' %>">
+                                <div class="max-w-3/4 <%= message.sender._id.toString() === user.id ? 'bg-purple-100 text-gray-800' : 'bg-gray-100 text-gray-800' %> rounded-lg px-4 py-2 shadow-sm">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-xs font-medium <%= message.sender._id.toString() === user.id ? 'text-purple-600' : 'text-gray-600' %>">
+                                            <%= message.sender.firstName %> <%= message.sender.lastName %>
+                                        </span>
+                                        <span class="text-xs text-gray-500">
+                                            <%= new Date(message.createdAt).toLocaleString('fr-FR') %>
+                                        </span>
+                                    </div>
+                                    <p class="text-sm whitespace-pre-wrap"><%= message.content %></p>
+                                    <% if (message.attachments && message.attachments.length > 0) { %>
+                                        <div class="mt-2 space-y-1">
+                                            <% message.attachments.forEach(attachment => { %>
+                                                <a href="/uploads/<%= attachment.path %>" target="_blank" class="text-xs text-blue-600 hover:text-blue-800 flex items-center">
+                                                    <i class="fas fa-paperclip mr-1"></i>
+                                                    <%= attachment.name %> (<%= (attachment.size / 1024).toFixed(1) %> KB)
+                                                </a>
+                                            <% }) %>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                </div>
+                
+                <!-- Formulaire de message -->
+                <div class="p-4 border-t border-gray-200">
+                    <form id="message-form" class="space-y-4">
+                        <input type="hidden" name="conversationId" value="<%= activeConversation._id %>">
+                        <div>
+                            <textarea name="content" id="message-content" rows="3" placeholder="Écrivez votre message..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"></textarea>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <button type="button" id="attach-file" class="text-gray-600 hover:text-gray-800">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <input type="file" id="file-input" class="hidden" multiple>
+                                <div id="attachments-preview" class="flex items-center space-x-2"></div>
+                            </div>
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                <i class="fas fa-paper-plane mr-2"></i> Envoyer
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <% } else { %>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden h-full flex items-center justify-center">
+                <div class="text-center p-8">
+                    <i class="fas fa-comments text-gray-300 text-6xl mb-4"></i>
+                    <h3 class="text-xl font-medium text-gray-900 mb-2">Aucune conversation sélectionnée</h3>
+                    <p class="text-gray-500 mb-6">Sélectionnez une conversation dans la liste ou commencez une nouvelle conversation.</p>
+                    <button id="new-message-btn-empty" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                        <i class="fas fa-plus mr-2"></i> Nouveau message
+                    </button>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<!-- Modal de nouveau message -->
+<div id="new-message-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg max-w-lg w-full p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-medium text-gray-900">Nouveau message</h3>
+            <button id="close-modal" class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="new-conversation-form" class="space-y-4">
+            <div>
+                <label for="recipient" class="block text-sm font-medium text-gray-700 mb-1">Destinataire</label>
+                <select id="recipient" name="recipient" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" required>
+                    <option value="">Sélectionnez un destinataire</option>
+                    <% recipients.forEach(recipient => { %>
+                        <option value="<%= recipient._id %>"><%= recipient.firstName %> <%= recipient.lastName %> (<%= recipient.role === 'admin' ? 'Administrateur' : 'Client' %>)</option>
+                    <% }) %>
+                </select>
+            </div>
+            
+            <div>
+                <label for="project" class="block text-sm font-medium text-gray-700 mb-1">Projet (optionnel)</label>
+                <select id="project" name="project" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <option value="">Aucun projet</option>
+                    <% projects.forEach(project => { %>
+                        <option value="<%= project._id %>"><%= project.name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            
+            <div>
+                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Sujet</label>
+                <input type="text" id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" required>
+            </div>
+            
+            <div>
+                <label for="content" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <textarea id="content" name="content" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none" required></textarea>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button type="button" id="cancel-message" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    Annuler
+                </button>
+                <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                    Envoyer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Scroll to bottom of messages container
+        const messagesContainer = document.getElementById('messages-container');
+        if (messagesContainer) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // New message modal
+        const newMessageBtn = document.getElementById('new-message-btn');
+        const newMessageBtnEmpty = document.getElementById('new-message-btn-empty');
+        const newMessageModal = document.getElementById('new-message-modal');
+        const closeModal = document.getElementById('close-modal');
+        const cancelMessage = document.getElementById('cancel-message');
+        
+        function openModal() {
+            newMessageModal.classList.remove('hidden');
+        }
+        
+        function closeModalFunc() {
+            newMessageModal.classList.add('hidden');
+            document.getElementById('new-conversation-form').reset();
+        }
+        
+        if (newMessageBtn) newMessageBtn.addEventListener('click', openModal);
+        if (newMessageBtnEmpty) newMessageBtnEmpty.addEventListener('click', openModal);
+        if (closeModal) closeModal.addEventListener('click', closeModalFunc);
+        if (cancelMessage) cancelMessage.addEventListener('click', closeModalFunc);
+        
+        // Close modal when clicking outside
+        newMessageModal.addEventListener('click', function(e) {
+            if (e.target === newMessageModal) {
+                closeModalFunc();
+            }
+        });
+        
+        // New conversation form
+        const newConversationForm = document.getElementById('new-conversation-form');
+        
+        if (newConversationForm) {
+            newConversationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const data = {
+                    recipient: formData.get('recipient'),
+                    project: formData.get('project') || null,
+                    subject: formData.get('subject'),
+                    content: formData.get('content')
+                };
+                
+                fetch('/api/v1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        window.location.href = `/dashboard/messages/conversations/${data.data.conversation._id}`;
+                    } else {
+                        throw new Error(data.message || 'Une erreur est survenue');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Une erreur est survenue lors de l\'envoi du message.');
+                });
+            });
+        }
+        
+        // Message form
+        const messageForm = document.getElementById('message-form');
+        
+        if (messageForm) {
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const data = {
+                    conversationId: formData.get('conversationId'),
+                    content: formData.get('content')
+                };
+                
+                if (!data.content.trim()) {
+                    return;
+                }
+                
+                fetch('/api/v1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Reload the page to show the new message
+                        window.location.reload();
+                    } else {
+                        throw new Error(data.message || 'Une erreur est survenue');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Une erreur est survenue lors de l\'envoi du message.');
+                });
+            });
+        }
+        
+        // File attachment
+        const attachFileBtn = document.getElementById('attach-file');
+        const fileInput = document.getElementById('file-input');
+        const attachmentsPreview = document.getElementById('attachments-preview');
+        
+        if (attachFileBtn && fileInput) {
+            attachFileBtn.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', function() {
+                attachmentsPreview.innerHTML = '';
+                
+                for (let i = 0; i < this.files.length; i++) {
+                    const file = this.files[i];
+                    const fileSize = (file.size / 1024).toFixed(1);
+                    
+                    const filePreview = document.createElement('div');
+                    filePreview.className = 'flex items-center bg-gray-100 rounded px-2 py-1 text-xs';
+                    filePreview.innerHTML = `
+                        <span class="truncate max-w-xs">${file.name} (${fileSize} KB)</span>
+                        <button type="button" class="ml-2 text-gray-500 hover:text-gray-700 remove-file" data-index="${i}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    
+                    attachmentsPreview.appendChild(filePreview);
+                }
+                
+                // Remove file
+                const removeFileBtns = document.querySelectorAll('.remove-file');
+                removeFileBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        const newFileList = Array.from(fileInput.files).filter((_, i) => i !== index);
+                        
+                        // Create a new FileList (not directly possible, so we need to reset the input)
+                        fileInput.value = '';
+                        attachmentsPreview.innerHTML = '';
+                        
+                        // TODO: Handle file removal properly (would require a custom solution with FormData)
+                    });
+                });
+            });
+        }
+        
+        // Archive/unarchive conversation
+        const archiveButtons = document.querySelectorAll('.archive-conversation');
+        
+        archiveButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const conversationId = this.getAttribute('data-id');
+                const isArchived = this.title === 'Désarchiver';
+                
+                fetch(`/api/v1/messages/conversations/${conversationId}/${isArchived ? 'unarchive' : 'archive'}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        window.location.reload();
+                    } else {
+                        throw new Error(data.message || 'Une erreur est survenue');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Une erreur est survenue lors de la modification de la conversation.');
+                });
+            });
+        });
+        
+        // Filter conversations
+        const conversationFilter = document.getElementById('conversation-filter');
+        
+        if (conversationFilter) {
+            conversationFilter.addEventListener('change', function() {
+                const archived = this.value === 'archived';
+                window.location.href = `/dashboard/messages?archived=${archived}`;
+            });
+        }
+        
+        // Search conversations
+        const searchInput = document.getElementById('search-conversations');
+        
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const search = this.value.trim();
+                    if (search) {
+                        window.location.href = `/dashboard/messages?search=${encodeURIComponent(search)}`;
+                    }
+                }
+            });
+        }
+    });
+</script>
