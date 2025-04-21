@@ -1,0 +1,81 @@
+<div class="relative inline-block text-left">
+  <div>
+    <button type="button" id="language-menu-button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" aria-expanded="false" aria-haspopup="true">
+      <% const currentLocale = getLocale(); %>
+      <% if (currentLocale === 'fr') { %>
+        <span class="flex items-center">
+          <img src="/images/flags/fr.svg" alt="Français" class="h-4 w-4 mr-2">
+          Français
+        </span>
+      <% } else if (currentLocale === 'en') { %>
+        <span class="flex items-center">
+          <img src="/images/flags/en.svg" alt="English" class="h-4 w-4 mr-2">
+          English
+        </span>
+      <% } else if (currentLocale === 'es') { %>
+        <span class="flex items-center">
+          <img src="/images/flags/es.svg" alt="Español" class="h-4 w-4 mr-2">
+          Español
+        </span>
+      <% } %>
+      <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="language-menu" class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="language-menu-button" tabindex="-1">
+    <div class="py-1" role="none">
+      <a href="?lang=fr" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 <%= currentLocale === 'fr' ? 'bg-gray-100' : '' %>" role="menuitem" tabindex="-1">
+        <img src="/images/flags/fr.svg" alt="Français" class="h-4 w-4 mr-2">
+        Français
+      </a>
+      <a href="?lang=en" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 <%= currentLocale === 'en' ? 'bg-gray-100' : '' %>" role="menuitem" tabindex="-1">
+        <img src="/images/flags/en.svg" alt="English" class="h-4 w-4 mr-2">
+        English
+      </a>
+      <a href="?lang=es" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 <%= currentLocale === 'es' ? 'bg-gray-100' : '' %>" role="menuitem" tabindex="-1">
+        <img src="/images/flags/es.svg" alt="Español" class="h-4 w-4 mr-2">
+        Español
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const languageMenuButton = document.getElementById('language-menu-button');
+    const languageMenu = document.getElementById('language-menu');
+    
+    if (languageMenuButton && languageMenu) {
+      // Ouvrir/fermer le menu de langues
+      languageMenuButton.addEventListener('click', function() {
+        languageMenu.classList.toggle('hidden');
+      });
+      
+      // Fermer le menu si on clique ailleurs
+      document.addEventListener('click', function(event) {
+        if (!languageMenuButton.contains(event.target) && !languageMenu.contains(event.target)) {
+          languageMenu.classList.add('hidden');
+        }
+      });
+      
+      // Ajouter le paramètre de langue aux liens de la page
+      const languageLinks = languageMenu.querySelectorAll('a');
+      languageLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+          event.preventDefault();
+          
+          const lang = this.getAttribute('href').split('=')[1];
+          const currentUrl = new URL(window.location.href);
+          
+          // Mettre à jour ou ajouter le paramètre de langue
+          currentUrl.searchParams.set('lang', lang);
+          
+          // Rediriger vers la même page avec le paramètre de langue
+          window.location.href = currentUrl.toString();
+        });
+      });
+    }
+  });
+</script>

@@ -1,0 +1,39 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= title %> | DevCraft</title>
+
+<!-- PWA -->
+<meta name="theme-color" content="#7c3aed">
+<meta name="description" content="DevCraft - Solutions de développement web sur mesure">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DevCraft">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/images/icons/apple-icon-180x180.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+
+<!-- Styles -->
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+<script src="/js/main.js" defer></script>
+<script src="/js/pwa.js" defer></script>
+
+<!-- Open Graph / Social Media -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="<%= config.server.appUrl %>">
+<meta property="og:title" content="<%= title %> | DevCraft">
+<meta property="og:description" content="DevCraft - Solutions de développement web sur mesure">
+<meta property="og:image" content="<%= config.server.appUrl %>/images/og-image.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="<%= config.server.appUrl %>">
+<meta property="twitter:title" content="<%= title %> | DevCraft">
+<meta property="twitter:description" content="DevCraft - Solutions de développement web sur mesure">
+<meta property="twitter:image" content="<%= config.server.appUrl %>/images/og-image.jpg">
