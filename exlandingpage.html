@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevCraft - Solutions Web Sur Mesure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+        }
+        .tech-icon {
+            transition: all 0.3s ease;
+        }
+        .tech-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #6e8efb;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-code text-purple-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">DevCraft</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link px-3 py-2 text-sm font-medium">Accueil</a>
+                    <a href="#services" class="nav-link px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#technologies" class="nav-link px-3 py-2 text-sm font-medium">Technologies</a>
+                    <a href="#portfolio" class="nav-link px-3 py-2 text-sm font-medium">Portfolio</a>
+                    <a href="#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-500 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-3 px-2">
+            <a href="#home" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded">Accueil</a>
+            <a href="#services" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded">Services</a>
+            <a href="#technologies" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded">Technologies</a>
+            <a href="#portfolio" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded">Portfolio</a>
+            <a href="#contact" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Transformez vos idées en réalité numérique</h1>
+                    <p class="text-xl mb-8 opacity-90">Nous créons des solutions web sur mesure avec les dernières technologies pour propulser votre business en ligne.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#contact" class="bg-white text-purple-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold text-center transition duration-300">Demander un devis</a>
+                        <a href="#portfolio" class="border-2 border-white text-white hover:bg-white hover:text-purple-600 px-8 py-3 rounded-lg font-semibold text-center transition duration-300">Voir nos réalisations</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2282/2282188.png" alt="Développement Web" class="w-3/4 md:w-full max-w-md animate-float">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">150+</div>
+                    <div class="text-gray-600">Projets réalisés</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">98%</div>
+                    <div class="text-gray-600">Clients satisfaits</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">10+</div>
+                    <div class="text-gray-600">Technologies maîtrisées</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">24/7</div>
+                    <div class="text-gray-600">Support client</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Nos Services de Développement</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nous offrons une gamme complète de services pour répondre à tous vos besoins numériques.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-laptop-code text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Développement Frontend</h3>
+                    <p class="text-gray-600 mb-4">Interfaces utilisateur réactives et intuitives avec React, Vue.js ou Angular pour une expérience utilisateur exceptionnelle.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Design responsive</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Animations fluides</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Optimisation SEO</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-server text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Développement Backend</h3>
+                    <p class="text-gray-600 mb-4">Architectures backend robustes et sécurisées avec Node.js, Django ou Laravel pour des performances optimales.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> API RESTful</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Bases de données</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Authentification</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Applications Mobiles</h3>
+                    <p class="text-gray-600 mb-4">Applications cross-platform avec React Native ou Flutter pour toucher vos utilisateurs sur tous les appareils.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> iOS et Android</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Performances natives</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Publication sur stores</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-shopping-cart text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">E-commerce</h3>
+                    <p class="text-gray-600 mb-4">Boutiques en ligne performantes avec Shopify, WooCommerce ou solutions sur mesure pour maximiser vos ventes.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Paiements sécurisés</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Gestion de stocks</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Analytics intégrés</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-search text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">SEO & Performance</h3>
+                    <p class="text-gray-600 mb-4">Optimisation pour les moteurs de recherche et amélioration des performances pour un meilleur classement et UX.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Audit technique</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Optimisation Core Web Vitals</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Stratégie de contenu</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-cloud text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Hébergement & Maintenance</h3>
+                    <p class="text-gray-600 mb-4">Solutions d'hébergement sécurisées et services de maintenance pour garantir la disponibilité de votre application.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Déploiement continu</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Sauvegardes automatiques</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 mr-2"></i> Mises à jour de sécurité</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Technologies Maîtrisées</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nous utilisons les meilleures technologies du marché pour garantir des produits de qualité.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <!-- Tech 1 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="w-16 h-16 mb-4" alt="React">
+                    <span class="font-medium">React</span>
+                </div>
+                
+                <!-- Tech 2 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" class="w-16 h-16 mb-4" alt="Vue.js">
+                    <span class="font-medium">Vue.js</span>
+                </div>
+                
+                <!-- Tech 3 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" class="w-16 h-16 mb-4" alt="Angular">
+                    <span class="font-medium">Angular</span>
+                </div>
+                
+                <!-- Tech 4 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" class="w-16 h-16 mb-4" alt="Node.js">
+                    <span class="font-medium">Node.js</span>
+                </div>
+                
+                <!-- Tech 5 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" class="w-16 h-16 mb-4" alt="Django">
+                    <span class="font-medium">Django</span>
+                </div>
+                
+                <!-- Tech 6 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" class="w-16 h-16 mb-4" alt="Laravel">
+                    <span class="font-medium">Laravel</span>
+                </div>
+                
+                <!-- Tech 7 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" class="w-16 h-16 mb-4" alt="Flutter">
+                    <span class="font-medium">Flutter</span>
+                </div>
+                
+                <!-- Tech 8 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="w-16 h-16 mb-4" alt="React Native">
+                    <span class="font-medium">React Native</span>
+                </div>
+                
+                <!-- Tech 9 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="w-16 h-16 mb-4" alt="MongoDB">
+                    <span class="font-medium">MongoDB</span>
+                </div>
+                
+                <!-- Tech 10 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="w-16 h-16 mb-4" alt="MySQL">
+                    <span class="font-medium">MySQL</span>
+                </div>
+                
+                <!-- Tech 11 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" class="w-16 h-16 mb-4" alt="AWS">
+                    <span class="font-medium">AWS</span>
+                </div>
+                
+                <!-- Tech 12 -->
+                <div class="tech-icon flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="w-16 h-16 mb-4" alt="Docker">
+                    <span class="font-medium">Docker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Nos Réalisations</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Découvrez quelques-uns de nos projets récents qui ont transformé les businesses de nos clients.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="h-48 bg-purple-100 flex items-center justify-center">
+                        <i class="fas fa-shopping-bag text-purple-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Boutique en ligne "FashionHub"</h3>
+                        <p class="text-gray-600 mb-4">Plateforme e-commerce avec système de recommandation IA et paiements sécurisés.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">React</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">Node.js</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="h-48 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-blue-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Dashboard Analytics "DataVision"</h3>
+                        <p class="text-gray-600 mb-4">Solution de business intelligence avec visualisation de données en temps réel.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Vue.js</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Django</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="h-48 bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-green-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">App Mobile "FitTrack"</h3>
+                        <p class="text-gray-600 mb-4">Application de suivi d'activité physique avec synchronisation wearables.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Flutter</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Firebase</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Google Fit API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-block bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">Voir plus de projets</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Ce que disent nos clients</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nous sommes fiers des relations que nous avons bâties avec nos clients.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"L'équipe de DevCraft a transformé notre présence en ligne. Leur application mobile a augmenté nos ventes de 40% en seulement 3 mois."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Sophie Martin</h4>
+                            <p class="text-gray-500 text-sm">CEO, FashionHub</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Leur approche méthodique et leur expertise en React ont permis de créer une interface utilisateur qui a réduit notre taux de rebond de 60%."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Thomas Leroy</h4>
+                            <p class="text-gray-500 text-sm">Directeur Technique, DataVision</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Leur support après livraison est exceptionnel. Ils ont résolu tous nos problèmes rapidement et ont même formé notre équipe interne."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Émilie Dubois</h4>
+                            <p class="text-gray-500 text-sm">Responsable Digital, FitTrack</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Notre Processus de Développement</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Une méthodologie éprouvée pour des résultats exceptionnels.</p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="hidden md:block absolute left-1/2 h-full w-1 bg-purple-200 transform -translate-x-1/2"></div>
+                
+                <!-- Step 1 -->
+                <div class="flex flex-col md:flex-row items-center mb-16">
+                    <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0 md:text-right">
+                        <h3 class="text-xl font-bold mb-2">1. Consultation</h3>
+                        <p class="text-gray-600">Nous analysons vos besoins, vos objectifs et votre public cible pour établir une stratégie sur mesure.</p>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center md:justify-start">
+                        <div class="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-2xl font-bold shadow-lg">1</div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="flex flex-col md:flex-row items-center mb-16">
+                    <div class="md:w-1/2 order-2 md:pl-12 mb-8 md:mb-0">
+                        <h3 class="text-xl font-bold mb-2">2. Conception</h3>
+                        <p class="text-gray-600">Nous créons des maquettes et prototypes pour valider l'expérience utilisateur avant le développement.</p>
+                    </div>
+                    <div class="md:w-1/2 order-1 flex justify-center md:justify-end">
+                        <div class="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-2xl font-bold shadow-lg">2</div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="flex flex-col md:flex-row items-center mb-16">
+                    <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0 md:text-right">
+                        <h3 class="text-xl font-bold mb-2">3. Développement</h3>
+                        <p class="text-gray-600">Notre équipe code votre solution avec les meilleures pratiques et un contrôle qualité rigoureux.</p>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center md:justify-start">
+                        <div class="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-2xl font-bold shadow-lg">3</div>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 order-2 md:pl-12 mb-8 md:mb-0">
+                        <h3 class="text-xl font-bold mb-2">4. Livraison & Support</h3>
+                        <p class="text-gray-600">Nous déployons votre projet et restons disponibles pour toute assistance ou évolution future.</p>
+                    </div>
+                    <div class="md:w-1/2 order-1 flex justify-center md:justify-end">
+                        <div class="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-2xl font-bold shadow-lg">4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6">Prêt à donner vie à votre projet ?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Contactez-nous dès aujourd'hui pour une consultation gratuite et un devis personnalisé.</p>
+            <a href="#contact" class="inline-block bg-white text-purple-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition duration-300">Discutons de votre projet</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-12">
+                    <h2 class="text-3xl font-bold mb-6">Contactez-nous</h2>
+                    <p class="text-gray-600 mb-8">Que vous ayez une question sur nos services ou que vous souhaitiez discuter d'un projet, notre équipe est là pour vous aider.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Adresse</h4>
+                                <p class="text-gray-600">123 Rue du Développement, 75000 Paris, France</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Téléphone</h4>
+                                <p class="text-gray-600">+33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Email</h4>
+                                <p class="text-gray-600">contact@devcraft.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-4">Suivez-nous</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center text-gray-600 hover:text-purple-600 transition duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center text-gray-600 hover:text-purple-600 transition duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center text-gray-600 hover:text-purple-600 transition duration-300">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center text-gray-600 hover:text-purple-600 transition duration-300">
+                                <i class="fab fa-dribbble"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <form class="bg-gray-50 p-8 rounded-xl shadow-sm">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nom complet</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Votre nom">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="votre@email.com">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Service intéressé</label>
+                            <select id="service" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                <option value="">Sélectionnez un service</option>
+                                <option value="frontend">Développement Frontend</option>
+                                <option value="backend">Développement Backend</option>
+                                <option value="mobile">Applications Mobiles</option>
+                                <option value="ecommerce">E-commerce</option>
+                                <option value="seo">SEO & Performance</option>
+                                <option value="hosting">Hébergement & Maintenance</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Décrivez votre projet..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Questions Fréquentes</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Trouvez des réponses aux questions les plus courantes sur nos services.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ Item 1 -->
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-lg font-medium text-gray-900">Quel est votre délai moyen pour un projet ?</h3>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">Les délais varient en fonction de la complexité du projet. Un site vitrine simple peut prendre 2-4 semaines, tandis qu'une application web complexe peut nécessiter 3-6 mois. Nous fournissons une estimation précise après l'analyse de vos besoins.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-lg font-medium text-gray-900">Proposez-vous des services de maintenance après livraison ?</h3>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">Oui, nous offrons divers plans de maintenance adaptés à vos besoins, incluant mises à jour de sécurité, corrections de bugs, améliorations mineures et support technique. Ces plans sont disponibles en option après la livraison de votre projet.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-lg font-medium text-gray-900">Quelle est votre méthodologie de travail ?</h3>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">Nous utilisons une approche agile, avec des sprints de 2 semaines et des démonstrations régulières pour valider l'avancement. Cela nous permet d'ajuster le projet en cours de route et de vous impliquer activement dans le processus de développement.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-lg font-medium text-gray-900">Pouvez-vous travailler avec notre équipe interne ?</h3>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">Absolument. Nous pouvons compléter votre équipe interne en fournissant des développeurs experts pour des périodes déterminées, ou travailler en collaboration avec vos équipes sur des aspects spécifiques du projet. Nous nous adaptons à votre structure existante.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="mb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-lg font-medium text-gray-900">Comment établissez-vous vos tarifs ?</h3>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">Nos tarifs sont basés sur la complexité du projet, les technologies utilisées et le temps estimé. Nous proposons des forfaits pour les projets bien définis et des tarifs horaires pour les besoins plus flexibles. Après analyse de votre projet, nous vous fournissons un devis détaillé et transparent.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-code text-purple-500 mr-2"></i>
+                        DevCraft
+                    </h3>
+                    <p class="text-gray-400">Experts en développement web sur mesure depuis 2015. Nous transformons vos idées en solutions numériques performantes.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Développement Frontend</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Développement Backend</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Applications Mobiles</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">E-commerce</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">SEO & Performance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Liens utiles</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Accueil</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
+                        <li><a href="#technologies" class="text-gray-400 hover:text-white transition duration-300">Technologies</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition duration-300">Portfolio</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Abonnez-vous pour recevoir nos dernières actualités et conseils.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-900 w-full">
+                        <button type="submit" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-r-lg transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 DevCraft. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                // Toggle content
+                content.classList.toggle('hidden');
+                
+                // Rotate icon
+                if (content.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+                
+                // Close other FAQs
+                document.querySelectorAll('.faq-toggle').forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.nextElementSibling.classList.add('hidden');
+                        otherButton.querySelector('i').style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add shadow to navbar on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>

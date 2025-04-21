@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | DevCraft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <% if (typeof includeChart !== 'undefined' && includeChart) { %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <% } %>
+    <link rel="stylesheet" href="/css/main.css">
+    <% if (typeof extraCSS !== 'undefined') { %>
+        <%- extraCSS %>
+    <% } %>
+</head>
+<body class="bg-gray-100 font-sans">
+    <% if (typeof showHeader !== 'undefined' && showHeader) { %>
+        <%- include('../partials/header') %>
+    <% } %>
+    
+    <% if (typeof showSidebar !== 'undefined' && showSidebar) { %>
+        <%- include('../partials/sidebar') %>
+        <div class="main-content main-content-expanded ml-64 min-h-screen">
+            <%- include('../partials/dashboard-header') %>
+            <div class="p-6">
+                <%- body %>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="min-h-screen">
+            <%- body %>
+        </div>
+    <% } %>
+
+    <% if (typeof showFooter !== 'undefined' && showFooter) { %>
+        <%- include('../partials/footer') %>
+    <% } %>
+
+    <script src="/js/main.js"></script>
+    <% if (typeof extraJS !== 'undefined') { %>
+        <%- extraJS %>
+    <% } %>
+</body>
+</html>

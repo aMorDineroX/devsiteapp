@@ -1,0 +1,141 @@
+<!-- Top Navigation for Dashboard -->
+<header class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
+    <h1 class="text-2xl font-bold text-gray-800"><%= pageTitle || 'Tableau de bord' %></h1>
+    <div class="flex items-center space-x-4">
+        <div class="relative">
+            <button class="text-gray-500 hover:text-gray-700 notification-btn">
+                <i class="fas fa-bell"></i>
+                <% if (notifications && notifications.length > 0) { %>
+                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                <% } %>
+            </button>
+            <div class="notification-dropdown absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-50 hidden">
+                <div class="p-3 border-b">
+                    <h3 class="font-semibold">Notifications</h3>
+                </div>
+                <div class="max-h-64 overflow-y-auto">
+                    <% if (notifications && notifications.length > 0) { %>
+                        <% notifications.forEach(notification => { %>
+                            <div class="p-3 border-b hover:bg-gray-50">
+                                <p class="text-sm"><%= notification.message %></p>
+                                <p class="text-xs text-gray-500 mt-1"><%= notification.date %></p>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="p-4 text-center text-gray-500">
+                            Aucune notification pour le moment
+                        </div>
+                    <% } %>
+                </div>
+                <div class="p-2 text-center border-t">
+                    <a href="/notifications" class="text-xs text-purple-600 hover:underline">Voir toutes les notifications</a>
+                </div>
+            </div>
+        </div>
+        <div class="relative">
+            <button class="text-gray-500 hover:text-gray-700 message-btn">
+                <i class="fas fa-envelope"></i>
+                <% if (messages && messages.length > 0) { %>
+                <span class="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"></span>
+                <% } %>
+            </button>
+            <div class="message-dropdown absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-50 hidden">
+                <div class="p-3 border-b">
+                    <h3 class="font-semibold">Messages</h3>
+                </div>
+                <div class="max-h-64 overflow-y-auto">
+                    <% if (messages && messages.length > 0) { %>
+                        <% messages.forEach(message => { %>
+                            <div class="p-3 border-b hover:bg-gray-50">
+                                <div class="flex items-center mb-1">
+                                    <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-2">
+                                        <i class="fas fa-user text-gray-600"></i>
+                                    </div>
+                                    <p class="font-medium text-sm"><%= message.sender %></p>
+                                </div>
+                                <p class="text-sm truncate"><%= message.content %></p>
+                                <p class="text-xs text-gray-500 mt-1"><%= message.date %></p>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="p-4 text-center text-gray-500">
+                            Aucun message pour le moment
+                        </div>
+                    <% } %>
+                </div>
+                <div class="p-2 text-center border-t">
+                    <a href="/messages" class="text-xs text-purple-600 hover:underline">Voir tous les messages</a>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2 relative user-menu-container">
+            <button class="flex items-center space-x-2 focus:outline-none user-menu-btn">
+                <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white">
+                    <% if (user && user.profileImage && user.profileImage !== 'default-avatar.png') { %>
+                        <img src="/img/profiles/<%= user.profileImage %>" alt="<%= user.firstName %>" class="w-8 h-8 rounded-full object-cover">
+                    <% } else { %>
+                        <i class="fas fa-user"></i>
+                    <% } %>
+                </div>
+                <span class="text-sm font-medium"><%= user ? user.firstName : 'Utilisateur' %></span>
+                <i class="fas fa-chevron-down text-xs text-gray-500"></i>
+            </button>
+            <div class="absolute right-0 mt-12 w-48 bg-white rounded-md shadow-lg z-50 hidden user-dropdown">
+                <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mon profil</a>
+                <a href="/profile/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Paramètres</a>
+                <div class="border-t my-1"></div>
+                <a href="/auth/logout" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Déconnexion</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Notification dropdown toggle
+    const notificationBtn = document.querySelector('.notification-btn');
+    const notificationDropdown = document.querySelector('.notification-dropdown');
+    
+    if (notificationBtn && notificationDropdown) {
+        notificationBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('hidden');
+            messageDropdown.classList.add('hidden');
+            userDropdown.classList.add('hidden');
+        });
+    }
+    
+    // Message dropdown toggle
+    const messageBtn = document.querySelector('.message-btn');
+    const messageDropdown = document.querySelector('.message-dropdown');
+    
+    if (messageBtn && messageDropdown) {
+        messageBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            messageDropdown.classList.toggle('hidden');
+            notificationDropdown.classList.add('hidden');
+            userDropdown.classList.add('hidden');
+        });
+    }
+    
+    // User menu dropdown toggle
+    const userMenuBtn = document.querySelector('.user-menu-btn');
+    const userDropdown = document.querySelector('.user-dropdown');
+    
+    if (userMenuBtn && userDropdown) {
+        userMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+            notificationDropdown.classList.add('hidden');
+            messageDropdown.classList.add('hidden');
+        });
+    }
+    
+    // Close dropdowns when clicking elsewhere
+    document.addEventListener('click', function() {
+        if (notificationDropdown) notificationDropdown.classList.add('hidden');
+        if (messageDropdown) messageDropdown.classList.add('hidden');
+        if (userDropdown) userDropdown.classList.add('hidden');
+    });
+});
+</script>
