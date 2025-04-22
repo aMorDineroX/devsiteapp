@@ -57,18 +57,31 @@ app.get('/', (req, res) => {
 });
 
 // Import routes
-// const authRoutes = require('./routes/auth');
-// const serviceRoutes = require('./routes/services');
-// const projectRoutes = require('./routes/projects');
-// const orderRoutes = require('./routes/orders');
-// const dashboardRoutes = require('./routes/dashboard');
+const authRoutes = require('./routes/auth.routes');
+const serviceRoutes = require('./routes/service.routes');
+const projectRoutes = require('./routes/project.routes');
+const orderRoutes = require('./routes/order.routes');
+const dashboardRoutes = require('./routes/dashboard.routes');
+const paymentRoutes = require('./routes/payment.routes');
+const notificationRoutes = require('./routes/notification.routes');
+const messageRoutes = require('./routes/message.routes');
 
 // Use routes
-// app.use('/auth', authRoutes);
-// app.use('/services', serviceRoutes);
-// app.use('/projects', projectRoutes);
-// app.use('/orders', orderRoutes);
-// app.use('/dashboard', dashboardRoutes);
+app.use('/auth', authRoutes);
+app.use('/services', serviceRoutes);
+app.use('/projects', projectRoutes);
+app.use('/orders', orderRoutes);
+app.use('/dashboard', dashboardRoutes);
+app.use('/payments', paymentRoutes);
+app.use('/notifications', notificationRoutes);
+
+// API routes
+app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/projects', projectRoutes);
+app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/payments', paymentRoutes);
+app.use('/api/v1/notifications', notificationRoutes);
+app.use('/api/v1/messages', messageRoutes);
 
 // 404 handler
 app.use((req, res, next) => {

@@ -1,0 +1,49 @@
+<%- include('../partials/header') %>
+
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <div class="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center text-red-600 mx-auto mb-6">
+                <i class="fas fa-times-circle text-4xl"></i>
+            </div>
+            
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">Paiement annulé</h1>
+            <p class="text-gray-600 mb-6">Votre paiement a été annulé. Aucun montant n'a été débité de votre compte.</p>
+            
+            <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Détails de la commande</h2>
+                
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Numéro de commande</span>
+                        <span class="font-medium"><%= order.invoiceNumber %></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Date</span>
+                        <span class="font-medium"><%= formatDate(new Date()) %></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Montant total</span>
+                        <span class="font-medium"><%= formatCurrency(order.totalAmount) %></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Statut</span>
+                        <span class="font-medium text-yellow-600">En attente</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <a href="/dashboard/orders/<%= order._id %>/payment" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                    <i class="fas fa-credit-card mr-2"></i> Réessayer le paiement
+                </a>
+                
+                <a href="/dashboard/orders" class="block mt-4 text-purple-600 hover:text-purple-700">
+                    Retour à mes commandes
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

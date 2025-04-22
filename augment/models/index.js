@@ -5,6 +5,7 @@ const Order = require('./order.model');
 const Review = require('./review.model');
 const Message = require('./message.model');
 const Conversation = require('./conversation.model');
+const Notification = require('./notification.model');
 
 module.exports = {
   User,
@@ -13,5 +14,6 @@ module.exports = {
   Order,
   Review,
   Message,
-  Conversation
+  Conversation,
+  Notification
 };
