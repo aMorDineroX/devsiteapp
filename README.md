@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # DevCraft - Solutions Web Sur Mesure
 
 Bienvenue sur le projet **DevCraft**, une landing page moderne et responsive pour présenter les services de développement web sur mesure.
@@ -43,7 +42,6 @@ Les contributions sont les bienvenues ! Si vous souhaitez améliorer ce projet, 
 ## Licence
 
 Ce projet est sous licence MIT. Vous êtes libre de l'utiliser et de le modifier selon vos besoins.
-=======
 # DevCraft - Solutions Web Sur Mesure
 
 ![DevCraft Logo](https://cdn-icons-png.flaticon.com/512/2282/2282188.png)
@@ -209,4 +207,3 @@ Pour toute question ou demande de devis, n'hésitez pas à nous contacter :
 ---
 
 &copy; 2023 DevCraft - Solutions Web Sur Mesure. Tous droits réservés.
->>>>>>> add7d459 (secondcommit)

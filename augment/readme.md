@@ -1,10 +1,10 @@
-# DevCraft - Solutions Web Sur Mesure
+# DevCraft - Application de Services de Développement Web
 
 ![DevCraft Logo](https://cdn-icons-png.flaticon.com/512/2282/2282188.png)
 
-## 🚀 À Propos
+## � Vue d'ensemble
 
-DevCraft est une plateforme professionnelle dédiée à la fourniture de services de développement web sur mesure. Notre mission est de transformer vos idées en solutions numériques performantes et esthétiques, adaptées à vos besoins spécifiques.
+DevCraft est une plateforme complète de services de développement web permettant aux clients de commander des services, suivre leurs projets et communiquer avec les développeurs. Notre mission est de transformer vos idées en solutions numériques performantes et esthétiques, adaptées à vos besoins spécifiques.
 
 ## 🌟 Services Proposés
 
@@ -16,34 +16,37 @@ DevCraft est une plateforme professionnelle dédiée à la fourniture de service
 - **Optimisation SEO** - Amélioration du référencement et de la visibilité en ligne
 - **Maintenance & Support** - Services continus pour garder votre site performant et sécurisé
 
-## 💻 Technologies Maîtrisées
+## ✨ Fonctionnalités principales
+
+- 🛒 **Catalogue de services** - Présentation et commande de services de développement web
+- 📊 **Tableau de bord** - Suivi en temps réel de l'avancement des projets
+- 💬 **Messagerie** - Communication entre clients et administrateurs
+- 📈 **Analytiques** - Rapports détaillés et tableaux de bord statistiques
+- 💳 **Paiements** - Intégration avec Stripe pour des paiements sécurisés
+- 🔔 **Notifications** - Alertes en temps réel pour les mises à jour importantes
+- 📱 **PWA** - Application web progressive pour une expérience mobile optimale
+- 🌐 **Multilingue** - Support pour français, anglais et espagnol
+- 📚 **API documentée** - Documentation complète avec Swagger
+
+## 💻 Technologies Utilisées
 
 ### Frontend
-- React, Vue.js, Angular
 - HTML5, CSS3, JavaScript (ES6+)
-- Tailwind CSS, Bootstrap
-- Responsive Design
+- Tailwind CSS
+- EJS (Embedded JavaScript Templates)
+- Progressive Web App (PWA)
 
 ### Backend
 - Node.js, Express
-- MongoDB, MySQL
+- MongoDB, Mongoose
 - RESTful APIs
-- Authentication & Authorization
+- JWT Authentication
 
 ### Outils & Méthodes
 - Git & GitHub
-- Méthodologies Agile
-- CI/CD
-- Tests automatisés
-
-## 🛠️ Fonctionnalités de la Plateforme
-
-- **Espace Client** - Suivi en temps réel de l'avancement des projets
-- **Système de Devis** - Obtention rapide d'estimations personnalisées
-- **Portfolio** - Galerie des projets réalisés avec études de cas
-- **Blog** - Articles et ressources sur le développement web
-- **Système de Paiement** - Paiements sécurisés via Stripe
-- **Tableau de Bord Admin** - Gestion complète des projets, clients et services
+- CI/CD avec GitHub Actions
+- Tests avec Mocha et Chai
+- Swagger pour la documentation API
 
 ## 📝 Tâches de Développement
 
