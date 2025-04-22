@@ -1,4 +1,4 @@
-.qodo
-augment/node_modules/
-augment/node_modules/.cache/
-*.cache/
+# Dependencies
+node_modules/
+.cache/
+*.log
