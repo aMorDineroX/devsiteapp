@@ -1,239 +1,332 @@
-<!-- Stats Cards -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-gray-500 text-sm">Projets en cours</p>
-                <h3 class="text-2xl font-bold mt-2"><%= stats.activeProjects %></h3>
-                <p class="text-green-500 text-xs mt-2">+<%= stats.newProjects %> cette semaine</p>
-            </div>
-            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
-                <i class="fas fa-project-diagram"></i>
-            </div>
-        </div>
-    </div>
-    <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-gray-500 text-sm">Tâches complétées</p>
-                <h3 class="text-2xl font-bold mt-2"><%= stats.completedTasks %></h3>
-                <p class="text-green-500 text-xs mt-2">+<%= stats.newCompletedTasks %> cette semaine</p>
-            </div>
-            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                <i class="fas fa-check-circle"></i>
-            </div>
-        </div>
-    </div>
-    <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-gray-500 text-sm">Revenus ce mois</p>
-                <h3 class="text-2xl font-bold mt-2"><%= stats.currencySymbol %><%= stats.monthlyRevenue.toLocaleString() %></h3>
-                <p class="<%= stats.revenueChangePercentage >= 0 ? 'text-green-500' : 'text-red-500' %> text-xs mt-2"><%= stats.revenueChangePercentage >= 0 ? '+' : '' %><%= stats.revenueChangePercentage %>% vs dernier mois</p>
-            </div>
-            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                <i class="fas fa-dollar-sign"></i>
-            </div>
-        </div>
-    </div>
-    <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-gray-500 text-sm">Clients actifs</p>
-                <h3 class="text-2xl font-bold mt-2"><%= stats.activeClients %></h3>
-                <p class="text-green-500 text-xs mt-2">+<%= stats.newClients %> nouveaux</p>
-            </div>
-            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
-                <i class="fas fa-users"></i>
-            </div>
-        </div>
-    </div>
-</div>
+<% var showHeader = false; var showFooter = false; %>
 
-<!-- Charts Row -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-    <!-- Revenue Chart -->
-    <div class="bg-white rounded-xl shadow-sm p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-lg font-semibold">Revenus mensuels</h2>
-            <div class="flex space-x-2">
-                <button class="px-3 py-1 text-xs bg-purple-100 text-purple-600 rounded-full">2023</button>
-                <button class="px-3 py-1 text-xs bg-gray-100 text-gray-600 rounded-full">2022</button>
+<div class="bg-gray-100 min-h-screen">
+    <!-- Sidebar -->
+    <div class="sidebar fixed inset-y-0 left-0 bg-white shadow-lg w-64 z-50">
+        <div class="flex items-center justify-between p-4 border-b">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-code text-purple-600 text-2xl"></i>
+                <span class="logo-text text-xl font-bold">DevCraft</span>
             </div>
+            <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        <div class="h-64">
-            <canvas id="revenueChart"></canvas>
-        </div>
-    </div>
-
-    <!-- Project Status Chart -->
-    <div class="bg-white rounded-xl shadow-sm p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-lg font-semibold">Statut des projets</h2>
-            <a href="/projects" class="text-purple-600 text-sm font-medium">Voir tout</a>
-        </div>
-        <div class="h-64">
-            <canvas id="projectStatusChart"></canvas>
-        </div>
-    </div>
-</div>
-
-<!-- Recent Projects & Tasks -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <!-- Recent Projects -->
-    <div class="bg-white rounded-xl shadow-sm p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-lg font-semibold">Projets récents</h2>
-            <a href="/projects" class="text-purple-600 text-sm font-medium">Voir tout</a>
-        </div>
-        <div class="space-y-4">
-            <% if (recentProjects && recentProjects.length > 0) { %>
-                <% recentProjects.forEach(project => { %>
-                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition duration-200">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-<%= getProjectIconColor(project.category) %>-100 flex items-center justify-center text-<%= getProjectIconColor(project.category) %>-600">
-                                <i class="<%= getProjectIcon(project.category) %>"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium"><%= project.name %></h4>
-                                <p class="text-xs text-gray-500">Dernière mise à jour: <%= formatTimeAgo(project.updatedAt) %></p>
-                            </div>
-                        </div>
-                        <span class="px-2 py-1 bg-<%= getStatusColor(project.status) %>-100 text-<%= getStatusColor(project.status) %>-800 text-xs rounded-full"><%= project.status %></span>
+        <div class="p-4">
+            <div class="mb-8">
+                <div class="flex items-center space-x-3 bg-purple-100 p-3 rounded-lg">
+                    <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white">
+                        <i class="fas fa-user"></i>
                     </div>
-                <% }); %>
-            <% } else { %>
-                <div class="p-6 text-center text-gray-500">
-                    Aucun projet récent à afficher.
+                    <div class="sidebar-text">
+                        <p class="font-medium"><%= user ? user.name : 'Utilisateur' %></p>
+                        <p class="text-xs text-gray-500"><%= user && user.role ? user.role : 'Client' %></p>
+                    </div>
                 </div>
-            <% } %>
+            </div>
+            <nav>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="/dashboard" class="flex items-center space-x-3 p-3 rounded-lg active-nav">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span class="sidebar-text">Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/projects" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 nav-item">
+                            <i class="fas fa-project-diagram"></i>
+                            <span class="sidebar-text">Projets</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/orders" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 nav-item">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="sidebar-text">Commandes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/messages" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 nav-item">
+                            <i class="fas fa-envelope"></i>
+                            <span class="sidebar-text">Messages</span>
+                        </a>
+                    </li>
+                    <% if (user && user.role === 'admin') { %>
+                    <li>
+                        <a href="/admin" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 nav-item">
+                            <i class="fas fa-user-shield"></i>
+                            <span class="sidebar-text">Administration</span>
+                        </a>
+                    </li>
+                    <% } %>
+                    <li>
+                        <a href="/dashboard/settings" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 nav-item">
+                            <i class="fas fa-cog"></i>
+                            <span class="sidebar-text">Paramètres</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+            <a href="/auth/logout" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="sidebar-text">Déconnexion</span>
+            </a>
         </div>
     </div>
 
-    <!-- Recent Tasks -->
-    <div class="bg-white rounded-xl shadow-sm p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-lg font-semibold">Tâches à faire</h2>
-            <a href="/tasks" class="text-purple-600 text-sm font-medium">Voir tout</a>
-        </div>
-        <div class="space-y-4">
-            <% if (pendingTasks && pendingTasks.length > 0) { %>
-                <% pendingTasks.forEach(task => { %>
-                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition duration-200">
-                        <div class="flex items-center space-x-3">
-                            <form action="/tasks/<%= task._id %>/toggle" method="POST" class="task-toggle-form">
-                                <input type="checkbox" name="completed" class="rounded text-purple-600 task-checkbox" data-task-id="<%= task._id %>">
-                            </form>
-                            <div>
-                                <h4 class="font-medium"><%= task.name %></h4>
-                                <p class="text-xs text-gray-500">Projet: <%= task.project.name %> • Échéance: <%= formatDate(task.dueDate) %></p>
-                            </div>
+    <!-- Main Content -->
+    <div class="main-content main-content-expanded ml-64 min-h-screen">
+        <!-- Top Navigation -->
+        <header class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
+            <h1 class="text-2xl font-bold text-gray-800">Tableau de bord</h1>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                    </button>
+                </div>
+                <div class="relative">
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-envelope"></i>
+                        <span class="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"></span>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="text-sm font-medium"><%= user ? user.name.split(' ')[0] : 'Utilisateur' %></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="p-6">
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Projets en cours</p>
+                            <h3 class="text-2xl font-bold mt-2"><%- stats && stats.activeProjects || '0' %></h3>
+                            <p class="text-green-500 text-xs mt-2"><%- stats && stats.newProjects ? '+' + stats.newProjects + ' cette semaine' : 'Aucun nouveau' %></p>
                         </div>
-                        <div class="flex space-x-2">
-                            <% if (task.assignedTo && task.assignedTo.firstName) { %>
-                                <span class="w-6 h-6 rounded-full bg-<%= getRandomColor(task.assignedTo._id) %> text-white flex items-center justify-center text-xs" title="<%= task.assignedTo.firstName %> <%= task.assignedTo.lastName %>">
-                                    <%= task.assignedTo.firstName.charAt(0) %><%= task.assignedTo.lastName.charAt(0) %>
-                                </span>
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Commandes terminées</p>
+                            <h3 class="text-2xl font-bold mt-2"><%- stats && stats.completedOrders || '0' %></h3>
+                            <p class="text-green-500 text-xs mt-2"><%- stats && stats.newCompletedOrders ? '+' + stats.newCompletedOrders + ' cette semaine' : 'Aucune nouvelle' %></p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Montant payé</p>
+                            <h3 class="text-2xl font-bold mt-2"><%- stats && stats.totalPaid ? stats.totalPaid + '€' : '0€' %></h3>
+                            <p class="text-green-500 text-xs mt-2"><%- stats && stats.paymentIncrease ? '+' + stats.paymentIncrease + '% vs dernier mois' : 'Aucune variation' %></p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover transition duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Messages non lus</p>
+                            <h3 class="text-2xl font-bold mt-2"><%- stats && stats.unreadMessages || '0' %></h3>
+                            <p class="text-<%= stats && stats.unreadMessages > 0 ? 'yellow' : 'green' %>-500 text-xs mt-2"><%- stats && stats.unreadMessages > 0 ? stats.unreadMessages + ' à traiter' : 'Tout est lu' %></p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Projects -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-semibold">Projets récents</h2>
+                    <a href="/dashboard/projects" class="text-purple-600 text-sm font-medium hover:underline">Voir tout</a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Projet</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de mise à jour</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progression</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <% if (projects && projects.length > 0) { %>
+                                <% projects.forEach(function(project) { %>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-<%= getProjectColor(project) %>-100 flex items-center justify-center text-<%= getProjectColor(project) %>-600">
+                                                <i class="fas fa-<%= getProjectIcon(project) %>"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900"><%= project.name %></div>
+                                                <div class="text-sm text-gray-500"><%= project.type %></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-<%= getStatusColor(project.status) %>-100 text-<%= getStatusColor(project.status) %>-800">
+                                            <%= project.status %>
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <%= formatDate(project.updatedAt) %>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-<%= getStatusColor(project.status) %>-600 h-2.5 rounded-full" style="width: <%= project.progress %>%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 mt-1 block"><%= project.progress %>%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="/dashboard/projects/<%= project.id %>" class="text-purple-600 hover:text-purple-900">Détails</a>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                        Aucun projet à afficher
+                                    </td>
+                                </tr>
                             <% } %>
-                        </div>
-                    </div>
-                <% }); %>
-            <% } else { %>
-                <div class="p-6 text-center text-gray-500">
-                    Aucune tâche à faire pour le moment.
+                        </tbody>
+                    </table>
                 </div>
-            <% } %>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-semibold">Commandes récentes</h2>
+                    <a href="/dashboard/orders" class="text-purple-600 text-sm font-medium hover:underline">Voir tout</a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Montant</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <% if (orders && orders.length > 0) { %>
+                                <% orders.forEach(function(order) { %>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        #<%= order.orderNumber %>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900"><%= order.serviceName %></div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <%= formatDate(order.createdAt) %>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <%= order.amount %>€
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-<%= getOrderStatusColor(order.status) %>-100 text-<%= getOrderStatusColor(order.status) %>-800">
+                                            <%= order.status %>
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="/dashboard/orders/<%= order.id %>" class="text-purple-600 hover:text-purple-900">Détails</a>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                                        Aucune commande à afficher
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <style>
-    .card-hover:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    }
+.sidebar {
+    transition: all 0.3s ease;
+}
+.sidebar-collapsed {
+    width: 80px;
+}
+.sidebar-collapsed .sidebar-text {
+    display: none;
+}
+.sidebar-collapsed .logo-text {
+    display: none;
+}
+.sidebar-collapsed .nav-item {
+    justify-content: center;
+}
+.main-content {
+    transition: all 0.3s ease;
+}
+.main-content-expanded {
+    margin-left: 280px;
+}
+.main-content-collapsed {
+    margin-left: 80px;
+}
+.active-nav {
+    background-color: #7c3aed;
+    color: white;
+}
+.active-nav:hover {
+    background-color: #6d28d9;
+}
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
 </style>
 
 <script>
+    // Sidebar toggle
     document.addEventListener('DOMContentLoaded', function() {
-        // Revenue Chart
-        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-        const revenueChart = new Chart(revenueCtx, {
-            type: 'line',
-            data: {
-                labels: <%= JSON.stringify(charts.revenue.labels) %>,
-                datasets: [{
-                    label: 'Revenus',
-                    data: <%= JSON.stringify(charts.revenue.data) %>,
-                    backgroundColor: 'rgba(124, 58, 237, 0.1)',
-                    borderColor: 'rgba(124, 58, 237, 1)',
-                    borderWidth: 2,
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            drawBorder: false
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
 
-        // Project Status Chart
-        const projectStatusCtx = document.getElementById('projectStatusChart').getContext('2d');
-        const projectStatusChart = new Chart(projectStatusCtx, {
-            type: 'doughnut',
-            data: {
-                labels: <%= JSON.stringify(charts.projectStatus.labels) %>,
-                datasets: [{
-                    data: <%= JSON.stringify(charts.projectStatus.data) %>,
-                    backgroundColor: [
-                        'rgba(16, 185, 129, 1)',  // terminé
-                        'rgba(124, 58, 237, 1)',   // en cours
-                        'rgba(245, 158, 11, 1)',   // en revue
-                        'rgba(156, 163, 175, 1)'   // en attente
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '70%',
-                plugins: {
-                    legend: {
-                        position: 'right',
-                    }
-                }
-            }
-        });
-
-        // Task checkbox toggle
-        const taskCheckboxes = document.querySelectorAll('.task-checkbox');
-        taskCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const form = this.closest('form');
-                if (form) {
-                    form.submit();
-                }
-            });
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-collapsed');
+            mainContent.classList.toggle('main-content-collapsed');
+            mainContent.classList.toggle('main-content-expanded');
         });
     });
 </script>

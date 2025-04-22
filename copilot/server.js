@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
+const expressLayouts = require('express-ejs-layouts');
+const viewHelpers = require('./app/utils/view-helpers');
 
 // Chargement des variables d'environnement
 dotenv.config();
@@ -17,10 +19,25 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressLayouts);
 
-// Configuration du moteur de templates EJS
+// Configuration du moteur de templates EJS avec les fonctions d'aide
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'app/views'));
+app.set('layout', 'layouts/main');
+
+// Ajout des fonctions d'aide aux templates
+app.use((req, res, next) => {
+  res.locals.formatDate = viewHelpers.formatDate;
+  res.locals.getStatusColor = viewHelpers.getStatusColor;
+  res.locals.getProjectColor = viewHelpers.getProjectColor;
+  res.locals.getProjectIcon = viewHelpers.getProjectIcon;
+  res.locals.getOrderStatusColor = viewHelpers.getOrderStatusColor;
+  res.locals.truncate = viewHelpers.truncate;
+  // Ajout de l'utilisateur connecté aux templates (à remplacer par votre logique d'authentification)
+  res.locals.user = req.cookies.user ? JSON.parse(req.cookies.user) : null;
+  next();
+});
 
 // Connexion à MongoDB (à configurer avec votre base de données)
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/devcraft')
@@ -30,6 +47,77 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/devcraft')
 // Routes principales
 app.get('/', (req, res) => {
   res.render('index', { title: 'DevCraft - Solutions Web Sur Mesure' });
+});
+
+// Route pour le dashboard
+app.get('/dashboard', (req, res) => {
+  // Ici, vous devrez implémenter la vérification d'authentification
+  // et récupérer les données réelles de l'utilisateur depuis la base de données
+  
+  // Données factices pour la démonstration
+  const stats = {
+    activeProjects: 18,
+    newProjects: 2,
+    completedOrders: 124,
+    newCompletedOrders: 15,
+    totalPaid: '24580',
+    paymentIncrease: 12,
+    unreadMessages: 3
+  };
+  
+  const projects = [
+    {
+      id: 1,
+      name: 'E-commerce FashionHub',
+      type: 'e-commerce',
+      status: 'en cours',
+      progress: 65,
+      updatedAt: new Date()
+    },
+    {
+      id: 2,
+      name: 'Dashboard DataVision',
+      type: 'dashboard',
+      status: 'en révision',
+      progress: 90,
+      updatedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) // 7 jours avant
+    },
+    {
+      id: 3,
+      name: 'App FitTrack',
+      type: 'application mobile',
+      status: 'en cours',
+      progress: 40,
+      updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000) // 3 jours avant
+    }
+  ];
+  
+  const orders = [
+    {
+      id: 1,
+      orderNumber: 'ORD-001',
+      serviceName: 'Développement E-commerce',
+      amount: 2800,
+      status: 'payé',
+      createdAt: new Date()
+    },
+    {
+      id: 2,
+      orderNumber: 'ORD-002',
+      serviceName: 'Développement Mobile',
+      amount: 4500,
+      status: 'en attente',
+      createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) // 2 jours avant
+    }
+  ];
+  
+  res.render('dashboard/index', { 
+    title: 'DevCraft - Dashboard', 
+    layout: false, // Pas de layout parent pour le dashboard
+    stats,
+    projects,
+    orders
+  });
 });
 
 // Importation des routes
@@ -52,6 +140,21 @@ app.use((req, res) => {
 });
 
 // Démarrage du serveur
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
-});
+const startServer = (port) => {
+  // Convertir le port en nombre pour garantir le bon incrément
+  const portNumber = parseInt(port, 10);
+  
+  app.listen(portNumber, () => {
+    console.log(`Serveur démarré sur le port ${portNumber}`);
+  }).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Le port ${portNumber} est déjà utilisé, tentative sur le port ${portNumber + 1}...`);
+      startServer(portNumber + 1);
+    } else {
+      console.error('Erreur lors du démarrage du serveur:', err);
+    }
+  });
+};
+
+// Lancement du serveur sur le port initial
+startServer(PORT);
