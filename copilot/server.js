@@ -49,83 +49,13 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'DevCraft - Solutions Web Sur Mesure' });
 });
 
-// Route pour le dashboard
-app.get('/dashboard', (req, res) => {
-  // Ici, vous devrez implémenter la vérification d'authentification
-  // et récupérer les données réelles de l'utilisateur depuis la base de données
-  
-  // Données factices pour la démonstration
-  const stats = {
-    activeProjects: 18,
-    newProjects: 2,
-    completedOrders: 124,
-    newCompletedOrders: 15,
-    totalPaid: '24580',
-    paymentIncrease: 12,
-    unreadMessages: 3
-  };
-  
-  const projects = [
-    {
-      id: 1,
-      name: 'E-commerce FashionHub',
-      type: 'e-commerce',
-      status: 'en cours',
-      progress: 65,
-      updatedAt: new Date()
-    },
-    {
-      id: 2,
-      name: 'Dashboard DataVision',
-      type: 'dashboard',
-      status: 'en révision',
-      progress: 90,
-      updatedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) // 7 jours avant
-    },
-    {
-      id: 3,
-      name: 'App FitTrack',
-      type: 'application mobile',
-      status: 'en cours',
-      progress: 40,
-      updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000) // 3 jours avant
-    }
-  ];
-  
-  const orders = [
-    {
-      id: 1,
-      orderNumber: 'ORD-001',
-      serviceName: 'Développement E-commerce',
-      amount: 2800,
-      status: 'payé',
-      createdAt: new Date()
-    },
-    {
-      id: 2,
-      orderNumber: 'ORD-002',
-      serviceName: 'Développement Mobile',
-      amount: 4500,
-      status: 'en attente',
-      createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) // 2 jours avant
-    }
-  ];
-  
-  res.render('dashboard/index', { 
-    title: 'DevCraft - Dashboard', 
-    layout: false, // Pas de layout parent pour le dashboard
-    stats,
-    projects,
-    orders
-  });
-});
-
 // Importation des routes
 const authRoutes = require('./app/routes/auth.routes');
 const serviceRoutes = require('./app/routes/service.routes');
 const projectRoutes = require('./app/routes/project.routes');
 const orderRoutes = require('./app/routes/order.routes');
 const adminRoutes = require('./app/routes/admin.routes');
+const dashboardRoutes = require('./app/routes/dashboard.routes'); // Nouvelle importation
 
 // Utilisation des routes
 app.use('/auth', authRoutes);
@@ -133,6 +63,7 @@ app.use('/services', serviceRoutes);
 app.use('/projects', projectRoutes);
 app.use('/orders', orderRoutes);
 app.use('/admin', adminRoutes);
+app.use('/dashboard', dashboardRoutes); // Ajout des routes du dashboard
 
 // Gestion des erreurs 404
 app.use((req, res) => {

@@ -1,41 +1,86 @@
 const express = require('express');
 const router = express.Router();
 
-// Ici nous importerons le contrôleur des commandes
-// const orderController = require('../controllers/order.controller');
+// Middleware d'authentification (à implémenter)
+const authMiddleware = (req, res, next) => {
+  // Pour le développement, on laisse passer
+  next();
+};
 
-// Routes pour la gestion des commandes
-router.get('/', (req, res) => {
-  // Liste toutes les commandes de l'utilisateur connecté
-  res.status(200).json({ message: 'Liste des commandes' });
+// Liste des commandes (uniquement utilisateurs authentifiés)
+router.get('/', authMiddleware, (req, res) => {
+  // Dans un cas réel, on récupérerait les commandes de l'utilisateur depuis la base de données
+  const orders = [
+    {
+      id: 1,
+      orderNumber: 'ORD-001',
+      serviceName: 'Développement E-commerce',
+      amount: 2800,
+      status: 'payé',
+      createdAt: new Date()
+    },
+    {
+      id: 2,
+      orderNumber: 'ORD-002',
+      serviceName: 'Développement Mobile',
+      amount: 4500,
+      status: 'en attente',
+      createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) // 2 jours avant
+    }
+  ];
+  
+  res.render('orders/index', { 
+    title: 'Mes Commandes',
+    orders
+  });
 });
 
-router.get('/:id', (req, res) => {
-  // Récupère les détails d'une commande spécifique
-  res.status(200).json({ message: `Détails de la commande ${req.params.id}` });
-});
-
-router.post('/', (req, res) => {
-  // Crée une nouvelle commande
-  res.status(201).json({ message: 'Commande créée avec succès' });
-});
-
-router.patch('/:id/status', (req, res) => {
-  // Met à jour le statut d'une commande
-  res.status(200).json({ message: `Statut de la commande ${req.params.id} mis à jour` });
-});
-
-// Routes pour le paiement
-router.post('/checkout', (req, res) => {
-  res.status(200).json({ message: 'Session de paiement créée' });
-});
-
-router.get('/payment-success', (req, res) => {
-  res.status(200).json({ message: 'Paiement réussi' });
-});
-
-router.get('/payment-cancel', (req, res) => {
-  res.status(200).json({ message: 'Paiement annulé' });
+// Détails d'une commande
+router.get('/:id', authMiddleware, (req, res) => {
+  const orderId = parseInt(req.params.id);
+  
+  // Commande factice
+  const order = {
+    id: orderId,
+    orderNumber: `ORD-00${orderId}`,
+    serviceName: 'Développement E-commerce',
+    description: 'Création d\'une boutique en ligne complète avec système de paiement et gestion des stocks.',
+    amount: 2800,
+    status: 'payé',
+    createdAt: new Date(),
+    paidAt: new Date(),
+    items: [
+      {
+        name: 'Développement Frontend',
+        description: 'Interfaces utilisateur avec React',
+        price: 1200
+      },
+      {
+        name: 'Développement Backend',
+        description: 'API et base de données',
+        price: 1400
+      },
+      {
+        name: 'Intégration paiement',
+        description: 'Stripe et PayPal',
+        price: 200
+      }
+    ],
+    client: {
+      name: 'Sophie Martin',
+      email: 'sophie@example.com',
+      company: 'FashionHub SAS'
+    }
+  };
+  
+  if (orderId > 0 && orderId < 3) {
+    res.render('orders/details', { 
+      title: `Commande: ${order.orderNumber}`,
+      order
+    });
+  } else {
+    res.status(404).render('404', { title: 'Commande non trouvée' });
+  }
 });
 
 module.exports = router;
