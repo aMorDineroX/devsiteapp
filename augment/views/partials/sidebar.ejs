@@ -1,79 +1,90 @@
-<div class="sidebar">
-    <div class="p-4 border-b border-gray-200">
-        <div class="flex items-center">
-            <i class="fas fa-code text-purple-600 text-2xl mr-2"></i>
-            <span class="text-xl font-bold text-gray-900 logo-text">DevCraft</span>
+<div class="sidebar fixed inset-y-0 left-0 bg-white shadow-lg w-64 z-50">
+    <div class="flex items-center justify-between p-4 border-b">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-code text-purple-600 text-2xl"></i>
+            <span class="logo-text text-xl font-bold">DevCraft</span>
         </div>
+        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
-    
     <div class="p-4">
-        <div class="flex items-center mb-6">
-            <img src="<%= user.profileImage ? `/uploads/${user.profileImage}` : '/images/default-avatar.png' %>" alt="<%= user.firstName %> <%= user.lastName %>" class="w-10 h-10 rounded-full mr-3">
-            <div class="sidebar-text">
-                <h3 class="font-medium text-gray-900"><%= user.firstName %> <%= user.lastName %></h3>
-                <p class="text-xs text-gray-500"><%= user.role === 'admin' ? 'Administrateur' : 'Client' %></p>
+        <div class="mb-8">
+            <div class="flex items-center space-x-3 bg-purple-100 p-3 rounded-lg">
+                <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="sidebar-text">
+                    <p class="font-medium"><%= user.firstName %> <%= user.lastName %></p>
+                    <p class="text-xs text-gray-500"><%= user.role === 'admin' ? 'Administrateur' : 'Client' %></p>
+                </div>
             </div>
         </div>
-        
-        <nav class="space-y-1">
-            <a href="/dashboard" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'dashboard' ? 'bg-purple-50 text-purple-600' : '' %>">
-                <i class="fas fa-tachometer-alt w-5 text-center"></i>
-                <span class="ml-3 sidebar-text">Tableau de bord</span>
-            </a>
-            
-            <a href="/dashboard/projects" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'projects' ? 'bg-purple-50 text-purple-600' : '' %>">
-                <i class="fas fa-project-diagram w-5 text-center"></i>
-                <span class="ml-3 sidebar-text">Projets</span>
-            </a>
-            
-            <a href="/dashboard/services" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'services' ? 'bg-purple-50 text-purple-600' : '' %>">
-                <i class="fas fa-cogs w-5 text-center"></i>
-                <span class="ml-3 sidebar-text">Services</span>
-            </a>
-            
-            <a href="/dashboard/orders" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'orders' ? 'bg-purple-50 text-purple-600' : '' %>">
-                <i class="fas fa-shopping-cart w-5 text-center"></i>
-                <span class="ml-3 sidebar-text">Commandes</span>
-            </a>
-            
-            <a href="/dashboard/tasks" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'tasks' ? 'bg-purple-50 text-purple-600' : '' %>">
-                <i class="fas fa-tasks w-5 text-center"></i>
-                <span class="ml-3 sidebar-text">Tâches</span>
-            </a>
-            
-            <% if (user.role === 'admin') { %>
-                <a href="/dashboard/clients" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'clients' ? 'bg-purple-50 text-purple-600' : '' %>">
-                    <i class="fas fa-users w-5 text-center"></i>
-                    <span class="ml-3 sidebar-text">Clients</span>
-                </a>
-                
-                <a href="/dashboard/analytics" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'analytics' ? 'bg-purple-50 text-purple-600' : '' %>">
-                    <i class="fas fa-chart-line w-5 text-center"></i>
-                    <span class="ml-3 sidebar-text">Analytiques</span>
-                </a>
-                
-                <a href="/dashboard/settings" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'settings' ? 'bg-purple-50 text-purple-600' : '' %>">
-                    <i class="fas fa-cog w-5 text-center"></i>
-                    <span class="ml-3 sidebar-text">Paramètres</span>
-                </a>
-            <% } %>
-            
-            <a href="/dashboard/profile" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 <%= locals.currentPage === 'profile' ? 'bg-purple-50 text-purple-600' : '' %>">
-                <i class="fas fa-user w-5 text-center"></i>
-                <span class="ml-3 sidebar-text">Profil</span>
-            </a>
-            
-            <a href="/auth/logout" class="nav-item flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600">
-                <i class="fas fa-sign-out-alt w-5 text-center"></i>
-                <span class="ml-3 sidebar-text">Déconnexion</span>
-            </a>
+        <nav>
+            <ul class="space-y-2">
+                <li>
+                    <a href="/dashboard" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'dashboard' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span class="sidebar-text">Tableau de bord</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/projects" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'projects' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-project-diagram"></i>
+                        <span class="sidebar-text">Projets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/services" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'services' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-cogs"></i>
+                        <span class="sidebar-text">Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/orders" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'orders' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="sidebar-text">Commandes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/tasks" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'tasks' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-tasks"></i>
+                        <span class="sidebar-text">Tâches</span>
+                    </a>
+                </li>
+                <% if (user.role === 'admin') { %>
+                <li>
+                    <a href="/dashboard/clients" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'clients' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-users"></i>
+                        <span class="sidebar-text">Clients</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/analytics" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'analytics' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="sidebar-text">Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/settings" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'settings' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-cog"></i>
+                        <span class="sidebar-text">Paramètres</span>
+                    </a>
+                </li>
+                <% } %>
+                <li>
+                    <a href="/dashboard/profile" class="flex items-center space-x-3 p-3 rounded-lg <%= locals.currentPage === 'profile' ? 'active-nav' : 'hover:bg-gray-100 nav-item' %>">
+                        <i class="fas fa-user"></i>
+                        <span class="sidebar-text">Profil</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
     </div>
-    
-    <div class="absolute bottom-0 w-full p-4 border-t border-gray-200">
-        <button id="sidebar-toggle" class="flex items-center justify-center w-full px-4 py-2 text-sm text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
-            <i class="fas fa-chevron-left mr-2"></i>
-            <span class="sidebar-text">Réduire</span>
-        </button>
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+        <a href="/auth/logout" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 nav-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="sidebar-text">Déconnexion</span>
+        </a>
     </div>
 </div>
