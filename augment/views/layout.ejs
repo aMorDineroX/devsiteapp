@@ -57,14 +57,11 @@
     <% if (typeof includeChart !== 'undefined' && includeChart) { %>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <% } %>
-    <link rel="stylesheet" href="http://localhost:8080/css/main.css">
-    <link rel="stylesheet" href="http://localhost:8080/css/animations.css">
+    <link rel="stylesheet" href="/css/unified.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <% if (typeof extraCSS !== 'undefined') { %>
-        <%- extraCSS %>
-    <% } %>
+
 </head>
 <body class="bg-gray-100 font-sans">
     <% if (typeof showHeader !== 'undefined' && showHeader) { %>
@@ -127,8 +124,6 @@
             }
         });
     </script>
-    <% if (typeof extraJS !== 'undefined') { %>
-        <%- extraJS %>
-    <% } %>
+
 </body>
 </html>
