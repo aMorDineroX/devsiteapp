@@ -22,6 +22,16 @@ i18n.configure({
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Static files middleware with logging
+app.use((req, res, next) => {
+  if (req.path.endsWith('.css') || req.path.endsWith('.js') || req.path.endsWith('.png') || req.path.endsWith('.jpg') || req.path.endsWith('.svg')) {
+    console.log(`Static file requested: ${req.path}`);
+  }
+  next();
+});
+
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 app.use(i18n.init);
@@ -52,7 +62,9 @@ app.use(session({
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'DevCraft - Services de Développement Web',
-    user: req.session.user || null
+    user: req.session.user || null,
+    showHeader: true,
+    showFooter: true
   });
 });
 

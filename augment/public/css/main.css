@@ -1,5 +1,7 @@
 /* Styles globaux */
 :root {
+    /* Gradient Background */
+    --gradient-bg: linear-gradient(135deg, #6e8efb, #a777e3);
     /* Couleurs principales */
     --primary-color: #7c3aed; /* Violet plus profond */
     --primary-color-dark: #6d28d9;
@@ -1348,4 +1350,110 @@ a:hover {
     .text-center-mobile {
         text-align: center;
     }
+}
+
+/* Animations */
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animate-slide-up {
+    animation: slideUp 1s ease-in-out forwards;
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.staggered-item {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.gradient-bg {
+    background: var(--gradient-bg);
+}
+
+/* Scroll Animations */
+.animate-scroll {
+    animation: scroll 30s linear infinite;
+}
+
+.animate-scroll-reverse {
+    animation: scroll-reverse 30s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scroll-reverse {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Gradient Backgrounds */
+.gradient-purple-blue {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+}
+
+.gradient-blue-teal {
+    background: linear-gradient(135deg, #2193b0, #6dd5ed);
+}
+
+.gradient-orange-red {
+    background: linear-gradient(135deg, #ff8008, #fd2c72);
+}
+
+.gradient-green-blue {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+}
+
+.gradient-pink-orange {
+    background: linear-gradient(135deg, #ee0979, #ff6a00);
+}
+
+.gradient-purple-pink {
+    background: linear-gradient(135deg, #8e2de2, #e94057);
 }

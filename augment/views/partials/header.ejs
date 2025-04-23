@@ -13,30 +13,33 @@
             <div class="hidden md:flex items-center space-x-8">
                 <a href="/" class="nav-link px-3 py-2 text-sm font-medium <%= locals.currentPage === 'home' ? 'text-purple-600' : 'text-gray-700 hover:text-purple-600' %>">Accueil</a>
                 <a href="/services" class="nav-link px-3 py-2 text-sm font-medium <%= locals.currentPage === 'services' ? 'text-purple-600' : 'text-gray-700 hover:text-purple-600' %>">Services</a>
+                <a href="/technologies" class="nav-link px-3 py-2 text-sm font-medium <%= locals.currentPage === 'technologies' ? 'text-purple-600' : 'text-gray-700 hover:text-purple-600' %>">Technologies</a>
                 <a href="/portfolio" class="nav-link px-3 py-2 text-sm font-medium <%= locals.currentPage === 'portfolio' ? 'text-purple-600' : 'text-gray-700 hover:text-purple-600' %>">Portfolio</a>
                 <a href="/contact" class="nav-link px-3 py-2 text-sm font-medium <%= locals.currentPage === 'contact' ? 'text-purple-600' : 'text-gray-700 hover:text-purple-600' %>">Contact</a>
-                
+
                 <% if (locals.user) { %>
-                    <a href="/dashboard" class="bg-purple-600 text-white hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition duration-300">Mon espace</a>
+                    <a href="/dashboard" class="bg-purple-600 text-white hover:bg-purple-700 px-4 py-3 rounded-lg text-sm font-medium transition duration-300">Mon espace</a>
                 <% } else { %>
                     <a href="/auth/login" class="nav-link px-3 py-2 text-sm font-medium text-gray-700 hover:text-purple-600">Connexion</a>
-                    <a href="/auth/register" class="bg-purple-600 text-white hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition duration-300">S'inscrire</a>
+                    <a href="/auth/register" class="bg-purple-600 text-white hover:bg-purple-700 px-4 py-3 rounded-lg text-sm font-medium transition duration-300">S'inscrire</a>
                 <% } %>
             </div>
             <div class="md:hidden flex items-center">
-                <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none">
+                <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
     </div>
-    
+
+    <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-white pb-3 px-2">
         <a href="/" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded <%= locals.currentPage === 'home' ? 'text-purple-600' : 'text-gray-700' %>">Accueil</a>
         <a href="/services" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded <%= locals.currentPage === 'services' ? 'text-purple-600' : 'text-gray-700' %>">Services</a>
+        <a href="/technologies" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded <%= locals.currentPage === 'technologies' ? 'text-purple-600' : 'text-gray-700' %>">Technologies</a>
         <a href="/portfolio" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded <%= locals.currentPage === 'portfolio' ? 'text-purple-600' : 'text-gray-700' %>">Portfolio</a>
         <a href="/contact" class="block px-3 py-2 text-sm font-medium hover:bg-gray-100 rounded <%= locals.currentPage === 'contact' ? 'text-purple-600' : 'text-gray-700' %>">Contact</a>
-        
+
         <% if (locals.user) { %>
             <a href="/dashboard" class="block px-3 py-2 mt-2 bg-purple-600 text-white hover:bg-purple-700 text-sm font-medium rounded">Mon espace</a>
         <% } else { %>
@@ -69,7 +72,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+
         mobileMenuButton.addEventListener('click', function() {
             mobileMenu.classList.toggle('hidden');
         });
