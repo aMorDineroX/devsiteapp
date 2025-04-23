@@ -1,0 +1,175 @@
+// Button Base
+.btn {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: $border-radius;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:focus, &:hover {
+    text-decoration: none;
+    outline: 0;
+  }
+  
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+  
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+// Button Sizes
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: $border-radius-sm;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  border-radius: $border-radius-lg;
+}
+
+.btn-xl {
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: $border-radius-lg;
+}
+
+// Button Variants
+.btn-primary {
+  @include gradient-primary;
+  color: $color-white;
+  border: none;
+  
+  &:hover, &:focus {
+    background-image: linear-gradient(135deg, darken($color-primary, 5%), darken($color-primary-light, 5%));
+    box-shadow: $shadow;
+  }
+}
+
+.btn-secondary {
+  @include gradient-secondary;
+  color: $color-white;
+  border: none;
+  
+  &:hover, &:focus {
+    background-image: linear-gradient(135deg, darken($color-secondary, 5%), darken($color-secondary-light, 5%));
+    box-shadow: $shadow;
+  }
+}
+
+.btn-success {
+  @include gradient-success;
+  color: $color-white;
+  border: none;
+  
+  &:hover, &:focus {
+    background-image: linear-gradient(135deg, darken($color-success, 5%), darken($color-success-light, 5%));
+    box-shadow: $shadow;
+  }
+}
+
+.btn-warning {
+  @include gradient-warning;
+  color: $color-white;
+  border: none;
+  
+  &:hover, &:focus {
+    background-image: linear-gradient(135deg, darken($color-warning, 5%), darken($color-warning-light, 5%));
+    box-shadow: $shadow;
+  }
+}
+
+.btn-danger {
+  @include gradient-danger;
+  color: $color-white;
+  border: none;
+  
+  &:hover, &:focus {
+    background-image: linear-gradient(135deg, darken($color-danger, 5%), darken($color-danger-light, 5%));
+    box-shadow: $shadow;
+  }
+}
+
+.btn-outline-primary {
+  color: $color-primary;
+  background-color: transparent;
+  border-color: $color-primary;
+  
+  &:hover, &:focus {
+    color: $color-white;
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
+}
+
+.btn-outline-secondary {
+  color: $color-secondary;
+  background-color: transparent;
+  border-color: $color-secondary;
+  
+  &:hover, &:focus {
+    color: $color-white;
+    background-color: $color-secondary;
+    border-color: $color-secondary;
+  }
+}
+
+.btn-outline-white {
+  color: $color-white;
+  background-color: transparent;
+  border-color: $color-white;
+  
+  &:hover, &:focus {
+    color: $color-primary;
+    background-color: $color-white;
+    border-color: $color-white;
+  }
+}
+
+// Button with Icon
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+// Rounded Button
+.btn-rounded {
+  border-radius: 50px;
+}
+
+// Button with Shadow
+.btn-shadow {
+  box-shadow: $shadow;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Button with Hover Effect
+.btn-hover-lift {
+  @include hover-lift;
+}
+
+.btn-hover-scale {
+  @include hover-scale;
+}

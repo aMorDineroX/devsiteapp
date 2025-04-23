@@ -79,6 +79,16 @@ app.get('/', (req, res) => {
   });
 });
 
+// UI Test Route
+app.get('/ui-test', (req, res) => {
+  res.render('ui-test', {
+    title: 'Test des composants UI',
+    user: req.session.user || null,
+    showHeader: true,
+    showFooter: true
+  });
+});
+
 // Import routes
 const authRoutes = require('./routes/auth.routes');
 const serviceRoutes = require('./routes/service.routes');

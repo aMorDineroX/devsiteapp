@@ -1,250 +1,79 @@
 
-<style>
-    /* Styles essentiels pour la landing page */
-    .gradient-purple-blue {
-        background: linear-gradient(135deg, #6e8efb, #a777e3);
-    }
 
-    .gradient-blue-teal {
-        background: linear-gradient(135deg, #2193b0, #6dd5ed);
-    }
-
-    .gradient-orange-red {
-        background: linear-gradient(135deg, #ff8008, #fd2c72);
-    }
-
-    .gradient-green-blue {
-        background: linear-gradient(135deg, #11998e, #38ef7d);
-    }
-
-    .gradient-pink-orange {
-        background: linear-gradient(135deg, #ee0979, #ff6a00);
-    }
-
-    .gradient-purple-pink {
-        background: linear-gradient(135deg, #8e2de2, #e94057);
-    }
-
-    .text-gradient {
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-    }
-
-    .floating, .animate-float {
-        animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-        100% { transform: translateY(0px); }
-    }
-
-    .pulse {
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-    }
-
-    .bounce {
-        animation: bounce 1s infinite;
-    }
-
-    @keyframes bounce {
-        0%, 100% {
-            transform: translateY(0);
-            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        }
-        50% {
-            transform: translateY(-25%);
-            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        }
-    }
-
-    .spin-slow {
-        animation: spin 30s linear infinite;
-    }
-
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-
-    .blob {
-        animation: blob 7s infinite;
-    }
-
-    @keyframes blob {
-        0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-        50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-        100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    }
-
-    .glass {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .hover-lift {
-        transition: transform 0.3s ease;
-    }
-
-    .hover-lift:hover {
-        transform: translateY(-10px);
-    }
-
-    .hover-scale {
-        transition: transform 0.3s ease;
-    }
-
-    .hover-scale:hover {
-        transform: scale(1.05);
-    }
-
-    .staggered-item {
-        opacity: 0;
-        animation: fadeIn 0.5s ease-in-out forwards;
-    }
-
-    @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
-
-    .reveal {
-        position: relative;
-        opacity: 0;
-        transition: all 0.8s ease;
-    }
-
-    .reveal.active {
-        opacity: 1;
-    }
-
-    .reveal-left {
-        transform: translateX(-50px);
-    }
-
-    .reveal-left.active {
-        transform: translateX(0);
-    }
-
-    .reveal-right {
-        transform: translateX(50px);
-    }
-
-    .reveal-right.active {
-        transform: translateX(0);
-    }
-
-    .reveal-up {
-        transform: translateY(50px);
-    }
-
-    .reveal-up.active {
-        transform: translateY(0);
-    }
-
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-    .delay-400 { animation-delay: 0.4s; }
-    .delay-500 { animation-delay: 0.5s; }
-
-    .animate-scroll {
-        animation: scroll 30s linear infinite;
-    }
-
-    .animate-scroll-reverse {
-        animation: scroll-reverse 30s linear infinite;
-    }
-
-    @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-
-    @keyframes scroll-reverse {
-        0% { transform: translateX(-50%); }
-        100% { transform: translateX(0); }
-    }
-
-    .particles {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: 0;
-    }
-
-    .shape {
-        position: absolute;
-        z-index: 0;
-    }
-
-    .shape-circle {
-        border-radius: 50%;
-    }
-</style>
 
 <!-- Hero Section -->
-<section id="home" class="relative pt-24 pb-16 md:pt-32 md:pb-24 gradient-purple-blue text-white overflow-hidden">
+<section id="home" class="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+    <!-- Background Gradient with Animation -->
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 background-animate"></div>
+
     <!-- Particles Background -->
     <div class="particles"></div>
 
     <!-- Decorative Shapes -->
-    <div class="shape shape-circle bg-white opacity-10 w-64 h-64 absolute top-10 left-10 spin-slow"></div>
-    <div class="shape shape-blob bg-white opacity-5 w-96 h-96 absolute bottom-0 right-0 blob"></div>
-    <div class="shape shape-circle bg-white opacity-10 w-32 h-32 absolute top-1/4 right-1/4 pulse"></div>
+    <div class="shape shape-circle bg-white opacity-10 w-64 h-64 absolute -top-20 -left-20 spin-slow"></div>
+    <div class="shape shape-blob bg-gradient-to-r from-pink-500 to-purple-500 opacity-20 w-96 h-96 absolute -bottom-32 -right-32 blob"></div>
+    <div class="shape shape-circle bg-gradient-to-r from-blue-500 to-teal-400 opacity-20 w-40 h-40 absolute top-1/4 right-1/4 pulse"></div>
+    <div class="shape shape-circle bg-gradient-to-r from-yellow-400 to-orange-500 opacity-20 w-24 h-24 absolute bottom-1/4 left-1/4 floating"></div>
+
+    <!-- Mesh Gradient Overlay -->
+    <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuZGV2L3N2Z2pzIiB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI1NjAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHZpZXdCb3g9IjAgMCAxNDQwIDU2MCI+PGcgbWFzaz0idXJsKCNTdmdqc01hc2sxMDcwKSIgZmlsbD0ibm9uZSI+PHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iNTYwIiB4PSIwIiB5PSIwIiBmaWxsPSJ1cmwoI1N2Z2pzTGluZWFyR3JhZGllbnQxMDcxKSI+PC9yZWN0PjwvZz48ZGVmcz48bWFzayBpZD0iU3ZnanNNYXNrMTA3MCI+PHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iNTYwIiBmaWxsPSIjZmZmZmZmIj48L3JlY3Q+PC9tYXNrPjxsaW5lYXJHcmFkaWVudCBncmFkaWVudFRyYW5zZm9ybT0icm90YXRlKDIwLCAwLjUsIDAuNSkiIGlkPSJTdmdqc0xpbmVhckdyYWRpZW50MTA3MSI+PHN0b3Agc3RvcC1vcGFjaXR5PSIxIiBzdG9wLWNvbG9yPSJoc2xhKDI3NiwgOTElLCA3OSUsIDEpIiBvZmZzZXQ9IjAiPjwvc3RvcD48c3RvcCBzdG9wLW9wYWNpdHk9IjEiIHN0b3AtY29sb3I9ImhzbGEoMjIzLCA4NyUsIDYzJSwgMSkiIG9mZnNldD0iMC41Ij48L3N0b3A+PHN0b3Agc3RvcC1vcGFjaXR5PSIxIiBzdG9wLWNvbG9yPSJoc2xhKDE4NiwgOTMlLCA3MSUsIDEpIiBvZmZzZXQ9IjEiPjwvc3RvcD48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48L3N2Zz4=')"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="md:flex items-center">
             <div class="md:w-1/2 mb-10 md:mb-0 reveal reveal-left">
-                <span class="inline-block px-4 py-1 rounded-full bg-white bg-opacity-20 text-white text-sm font-medium mb-5 backdrop-blur-sm">
+                <span class="inline-block px-4 py-1 rounded-full bg-white bg-opacity-10 text-white text-sm font-medium mb-5 backdrop-blur-sm shadow-glow">
                     <span class="animate-pulse inline-block w-2 h-2 bg-green-400 rounded-full mr-2"></span>
                     Agence de développement web innovante
                 </span>
-                <h1 class="font-poppins text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                    <span class="text-gradient gradient-blue-teal">Transformez</span> vos idées en réalité numérique
+                <h1 class="font-poppins text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
+                    <span class="text-gradient gradient-blue-teal">Transformez</span> vos idées en <span class="typewriter">réalité numérique</span>
                 </h1>
-                <p class="text-xl mb-8 opacity-90 font-light">Nous créons des solutions web sur mesure avec les dernières technologies pour propulser votre business en ligne.</p>
+                <p class="text-xl mb-8 text-white opacity-90 font-light">Nous créons des solutions web sur mesure avec les dernières technologies pour propulser votre business en ligne.</p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 staggered-list">
-                    <a href="#contact" class="staggered-item glass hover-lift px-8 py-4 rounded-lg font-semibold text-center transition duration-300 shadow-lg border border-white border-opacity-20">
+                    <a href="#contact" class="staggered-item glass hover-lift px-8 py-4 rounded-lg font-semibold text-center transition duration-300 shadow-glow border border-white border-opacity-20">
                         <i class="fas fa-paper-plane mr-2"></i> Demander un devis
                     </a>
-                    <a href="#portfolio" class="staggered-item bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-center transition duration-300 shadow-lg hover-lift">
+                    <a href="#portfolio" class="staggered-item bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-center transition duration-300 shadow-glow hover-lift">
                         <i class="fas fa-eye mr-2"></i> Voir nos réalisations
                     </a>
                 </div>
                 <div class="flex items-center space-x-4 mt-8 reveal reveal-up delay-500">
                     <div class="flex -space-x-2">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-white">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-white">
-                        <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-white shadow-glow">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-white shadow-glow">
+                        <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-white shadow-glow">
                     </div>
-                    <p class="text-sm text-purple-100">Rejoint par <span class="font-bold counter" data-target="500">0</span>+ clients satisfaits</p>
+                    <p class="text-sm text-white">Rejoint par <span class="font-bold counter" data-target="500">0</span>+ clients satisfaits</p>
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center reveal reveal-right">
                 <div class="relative">
+                    <!-- Glow Effect -->
                     <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
-                    <img src="https://cdn-icons-png.flaticon.com/512/2282/2282188.png" alt="Développement Web" class="w-3/4 md:w-full max-w-md floating relative z-10">
+
+                    <!-- 3D Illustration -->
+                    <div class="w-3/4 md:w-full max-w-md floating relative z-10 drop-shadow-2xl flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-white text-9xl"></i>
+                    </div>
+
+                    <!-- Tech Icons Floating -->
+                    <div class="absolute top-0 left-0 w-16 h-16 bg-white rounded-full shadow-glow p-3 floating delay-300">
+                        <i class="fab fa-react text-blue-500 w-full h-full flex items-center justify-center text-3xl"></i>
+                    </div>
+                    <div class="absolute bottom-10 left-10 w-12 h-12 bg-white rounded-full shadow-glow p-2 floating delay-200">
+                        <i class="fab fa-node-js text-green-600 w-full h-full flex items-center justify-center text-3xl"></i>
+                    </div>
+                    <div class="absolute top-10 right-0 w-14 h-14 bg-white rounded-full shadow-glow p-3 floating delay-100">
+                        <i class="fab fa-vuejs text-green-500 w-full h-full flex items-center justify-center text-3xl"></i>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Scroll Down Indicator -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
-            <p class="text-sm mb-2 opacity-80">Découvrez nos services</p>
-            <a href="#services" class="inline-block bounce">
+            <p class="text-sm mb-2 text-white opacity-80">Découvrez nos services</p>
+            <a href="#services" class="inline-block bounce text-white">
                 <i class="fas fa-chevron-down text-xl"></i>
             </a>
         </div>
@@ -312,119 +141,145 @@
     <div class="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-purple-50 to-blue-50 rounded-bl-full opacity-70"></div>
     <div class="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-purple-50 to-blue-50 rounded-tr-full opacity-70"></div>
 
+    <!-- Animated Dots Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="dots-pattern"></div>
+    </div>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-16">
-            <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full mb-3">NOS EXPERTISES</span>
+            <span class="inline-block px-4 py-1.5 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 text-sm font-medium rounded-full mb-3 shadow-sm">
+                <i class="fas fa-star-of-life text-purple-500 mr-2 animate-spin-slow"></i>
+                NOS EXPERTISES
+            </span>
             <h2 class="text-4xl font-bold mb-4 font-poppins">Solutions de Développement <span class="text-gradient gradient-purple-blue">Sur Mesure</span></h2>
             <p class="text-gray-600 max-w-2xl mx-auto text-lg">Nous offrons une gamme complète de services pour répondre à tous vos besoins numériques et propulser votre entreprise vers le succès.</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 staggered-list">
             <!-- Service 1 -->
-            <div class="staggered-item service-card bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden p-8 transition duration-300 hover-lift border border-gray-100 reveal reveal-up">
-                <div class="bg-gradient-purple-blue w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-white">
-                    <i class="fas fa-laptop-code text-2xl"></i>
+            <div class="staggered-item service-card bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden p-0 transition duration-300 hover-lift border border-gray-100 reveal reveal-up group">
+                <div class="h-3 bg-gradient-purple-blue w-full"></div>
+                <div class="p-8">
+                    <div class="bg-gradient-purple-blue w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-laptop-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-purple-600 transition-colors duration-300">Développement Frontend</h3>
+                    <p class="text-gray-600 mb-4">Interfaces utilisateur réactives et intuitives avec React, Vue.js ou Angular pour une expérience utilisateur exceptionnelle.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Design responsive</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Animations fluides</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Optimisation SEO</li>
+                    </ul>
+                    <a href="/services/frontend" class="inline-flex items-center mt-6 text-purple-600 font-medium hover:text-purple-800 transition duration-300 group-hover:translate-x-2 transform">
+                        En savoir plus <i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Développement Frontend</h3>
-                <p class="text-gray-600 mb-4">Interfaces utilisateur réactives et intuitives avec React, Vue.js ou Angular pour une expérience utilisateur exceptionnelle.</p>
-                <ul class="text-gray-600 space-y-2">
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Design responsive</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Animations fluides</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Optimisation SEO</li>
-                </ul>
-                <a href="/services/frontend" class="inline-flex items-center mt-6 text-purple-600 font-medium hover:text-purple-800 transition duration-300">
-                    En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                </a>
             </div>
 
             <!-- Service 2 -->
-            <div class="staggered-item service-card bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden p-8 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-100">
-                <div class="bg-gradient-blue-teal w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-white">
-                    <i class="fas fa-server text-2xl"></i>
+            <div class="staggered-item service-card bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden p-0 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-100 group">
+                <div class="h-3 bg-gradient-blue-teal w-full"></div>
+                <div class="p-8">
+                    <div class="bg-gradient-blue-teal w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-server text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors duration-300">Développement Backend</h3>
+                    <p class="text-gray-600 mb-4">Architectures backend robustes et sécurisées avec Node.js, Django ou Laravel pour des performances optimales.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> API RESTful</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Bases de données</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Authentification</li>
+                    </ul>
+                    <a href="/services/backend" class="inline-flex items-center mt-6 text-blue-600 font-medium hover:text-blue-800 transition duration-300 group-hover:translate-x-2 transform">
+                        En savoir plus <i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Développement Backend</h3>
-                <p class="text-gray-600 mb-4">Architectures backend robustes et sécurisées avec Node.js, Django ou Laravel pour des performances optimales.</p>
-                <ul class="text-gray-600 space-y-2">
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> API RESTful</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Bases de données</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Authentification</li>
-                </ul>
-                <a href="/services/backend" class="inline-flex items-center mt-6 text-blue-600 font-medium hover:text-blue-800 transition duration-300">
-                    En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                </a>
             </div>
 
             <!-- Service 3 -->
-            <div class="staggered-item service-card bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden p-8 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-200">
-                <div class="bg-gradient-green-blue w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-white">
-                    <i class="fas fa-mobile-alt text-2xl"></i>
+            <div class="staggered-item service-card bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden p-0 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-200 group">
+                <div class="h-3 bg-gradient-green-blue w-full"></div>
+                <div class="p-8">
+                    <div class="bg-gradient-green-blue w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-mobile-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-green-600 transition-colors duration-300">Applications Mobiles</h3>
+                    <p class="text-gray-600 mb-4">Applications cross-platform avec React Native ou Flutter pour toucher vos utilisateurs sur tous les appareils.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> iOS et Android</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Performances natives</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Publication sur stores</li>
+                    </ul>
+                    <a href="/services/mobile" class="inline-flex items-center mt-6 text-green-600 font-medium hover:text-green-800 transition duration-300 group-hover:translate-x-2 transform">
+                        En savoir plus <i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Applications Mobiles</h3>
-                <p class="text-gray-600 mb-4">Applications cross-platform avec React Native ou Flutter pour toucher vos utilisateurs sur tous les appareils.</p>
-                <ul class="text-gray-600 space-y-2">
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> iOS et Android</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Performances natives</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Publication sur stores</li>
-                </ul>
-                <a href="/services/mobile" class="inline-flex items-center mt-6 text-green-600 font-medium hover:text-green-800 transition duration-300">
-                    En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                </a>
             </div>
 
             <!-- Service 4 -->
-            <div class="staggered-item service-card bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden p-8 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-300">
-                <div class="bg-gradient-orange-red w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-white">
-                    <i class="fas fa-shopping-cart text-2xl"></i>
+            <div class="staggered-item service-card bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden p-0 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-300 group">
+                <div class="h-3 bg-gradient-orange-red w-full"></div>
+                <div class="p-8">
+                    <div class="bg-gradient-orange-red w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-600 transition-colors duration-300">E-commerce</h3>
+                    <p class="text-gray-600 mb-4">Boutiques en ligne performantes avec Shopify, WooCommerce ou solutions sur mesure pour maximiser vos ventes.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Paiements sécurisés</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Gestion de stocks</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Analytics intégrés</li>
+                    </ul>
+                    <a href="/services/ecommerce" class="inline-flex items-center mt-6 text-orange-600 font-medium hover:text-orange-800 transition duration-300 group-hover:translate-x-2 transform">
+                        En savoir plus <i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
                 </div>
-                <h3 class="text-xl font-bold mb-3">E-commerce</h3>
-                <p class="text-gray-600 mb-4">Boutiques en ligne performantes avec Shopify, WooCommerce ou solutions sur mesure pour maximiser vos ventes.</p>
-                <ul class="text-gray-600 space-y-2">
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Paiements sécurisés</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Gestion de stocks</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Analytics intégrés</li>
-                </ul>
-                <a href="/services/ecommerce" class="inline-flex items-center mt-6 text-orange-600 font-medium hover:text-orange-800 transition duration-300">
-                    En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                </a>
             </div>
 
             <!-- Service 5 -->
-            <div class="staggered-item service-card bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden p-8 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-400">
-                <div class="bg-gradient-pink-orange w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-white">
-                    <i class="fas fa-search text-2xl"></i>
+            <div class="staggered-item service-card bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden p-0 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-400 group">
+                <div class="h-3 bg-gradient-pink-orange w-full"></div>
+                <div class="p-8">
+                    <div class="bg-gradient-pink-orange w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-search text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-pink-600 transition-colors duration-300">SEO & Performance</h3>
+                    <p class="text-gray-600 mb-4">Optimisation pour les moteurs de recherche et amélioration des performances pour un meilleur classement et UX.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Audit technique</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Optimisation Core Web Vitals</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Stratégie de contenu</li>
+                    </ul>
+                    <a href="/services/seo" class="inline-flex items-center mt-6 text-pink-600 font-medium hover:text-pink-800 transition duration-300 group-hover:translate-x-2 transform">
+                        En savoir plus <i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
                 </div>
-                <h3 class="text-xl font-bold mb-3">SEO & Performance</h3>
-                <p class="text-gray-600 mb-4">Optimisation pour les moteurs de recherche et amélioration des performances pour un meilleur classement et UX.</p>
-                <ul class="text-gray-600 space-y-2">
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Audit technique</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Optimisation Core Web Vitals</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Stratégie de contenu</li>
-                </ul>
-                <a href="/services/seo" class="inline-flex items-center mt-6 text-pink-600 font-medium hover:text-pink-800 transition duration-300">
-                    En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                </a>
             </div>
 
             <!-- Service 6 -->
-            <div class="staggered-item service-card bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden p-8 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-500">
-                <div class="bg-gradient-purple-pink w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-white">
-                    <i class="fas fa-cloud text-2xl"></i>
+            <div class="staggered-item service-card bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden p-0 transition duration-300 hover-lift border border-gray-100 reveal reveal-up delay-500 group">
+                <div class="h-3 bg-gradient-purple-pink w-full"></div>
+                <div class="p-8">
+                    <div class="bg-gradient-purple-pink w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-cloud text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-purple-600 transition-colors duration-300">Hébergement & Maintenance</h3>
+                    <p class="text-gray-600 mb-4">Solutions d'hébergement sécurisées et services de maintenance pour garantir la disponibilité de votre application.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Déploiement continu</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Sauvegardes automatiques</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Mises à jour de sécurité</li>
+                    </ul>
+                    <a href="/services/hosting" class="inline-flex items-center mt-6 text-purple-600 font-medium hover:text-purple-800 transition duration-300 group-hover:translate-x-2 transform">
+                        En savoir plus <i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Hébergement & Maintenance</h3>
-                <p class="text-gray-600 mb-4">Solutions d'hébergement sécurisées et services de maintenance pour garantir la disponibilité de votre application.</p>
-                <ul class="text-gray-600 space-y-2">
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Déploiement continu</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Sauvegardes automatiques</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Mises à jour de sécurité</li>
-                </ul>
-                <a href="/services/hosting" class="inline-flex items-center mt-6 text-purple-600 font-medium hover:text-purple-800 transition duration-300">
-                    En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                </a>
             </div>
         </div>
 
         <div class="text-center mt-16">
-            <a href="/services" class="inline-block bg-gradient-purple-blue hover:opacity-90 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 shadow-lg hover-lift">
+            <a href="/services" class="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 shadow-lg hover-lift transform hover:scale-105">
                 <i class="fas fa-th-large mr-2"></i> Explorer tous nos services
             </a>
         </div>
@@ -449,27 +304,27 @@
             <div class="overflow-hidden py-8">
                 <div class="flex space-x-8 animate-scroll">
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-16 h-16 mb-3 spin-slow">
+                        <i class="fab fa-react text-blue-500 text-5xl mb-3 spin-slow"></i>
                         <span class="text-gray-700 font-medium">React</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js" class="w-16 h-16 mb-3 spin-slow">
+                        <i class="fab fa-vuejs text-green-500 text-5xl mb-3 spin-slow"></i>
                         <span class="text-gray-700 font-medium">Vue.js</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular" class="w-16 h-16 mb-3">
+                        <i class="fab fa-angular text-red-600 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">Angular</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-16 h-16 mb-3">
+                        <i class="fab fa-node-js text-green-600 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">Node.js</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" class="w-16 h-16 mb-3">
+                        <i class="fab fa-python text-blue-600 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">Django</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel" class="w-16 h-16 mb-3">
+                        <i class="fab fa-laravel text-red-500 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">Laravel</span>
                     </div>
                 </div>
@@ -479,27 +334,27 @@
             <div class="overflow-hidden py-8 mt-8">
                 <div class="flex space-x-8 animate-scroll-reverse">
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="w-16 h-16 mb-3">
+                        <i class="fas fa-mobile-alt text-blue-400 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">Flutter</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Native" class="w-16 h-16 mb-3">
+                        <i class="fab fa-react text-blue-500 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">React Native</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="w-16 h-16 mb-3">
+                        <i class="fas fa-database text-green-500 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">MongoDB</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="w-16 h-16 mb-3">
+                        <i class="fas fa-database text-blue-600 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">MySQL</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" class="w-16 h-16 mb-3">
+                        <i class="fab fa-aws text-orange-500 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">AWS</span>
                     </div>
                     <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 min-w-max hover-scale">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-16 h-16 mb-3">
+                        <i class="fab fa-docker text-blue-500 text-5xl mb-3"></i>
                         <span class="text-gray-700 font-medium">Docker</span>
                     </div>
                 </div>
@@ -619,109 +474,40 @@
 </section>
 
 <!-- Testimonials Section -->
-<section class="py-20 bg-gray-50 relative overflow-hidden">
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize scroll reveal animations
-        const revealElements = document.querySelectorAll('.reveal');
-
-        function checkReveal() {
-            const windowHeight = window.innerHeight;
-            const revealPoint = 150;
-
-            revealElements.forEach(element => {
-                const revealTop = element.getBoundingClientRect().top;
-
-                if (revealTop < windowHeight - revealPoint) {
-                    element.classList.add('active');
-                } else {
-                    element.classList.remove('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', checkReveal);
-        window.addEventListener('resize', checkReveal);
-
-        // Check on initial load
-        checkReveal();
-
-        // Initialize counters
-        const counters = document.querySelectorAll('.counter');
-
-        counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const duration = parseInt(counter.getAttribute('data-duration') || 2000);
-            const increment = target / (duration / 16); // 60fps
-
-            let current = 0;
-
-            function updateCounter() {
-                current += increment;
-
-                if (current < target) {
-                    counter.textContent = Math.ceil(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = target;
-                }
-            }
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        updateCounter();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            observer.observe(counter);
-        });
-
-        // Initialize FAQ accordions
-        const faqToggles = document.querySelectorAll('.faq-toggle');
-        if (faqToggles.length > 0) {
-            faqToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const content = this.nextElementSibling;
-                    const icon = this.querySelector('i');
-                    content.classList.toggle('hidden');
-                    icon.classList.toggle('transform');
-                    icon.classList.toggle('rotate-180');
-                });
-            });
-        }
-    });
-</script>
+<section class="py-20 relative overflow-hidden">
     <!-- Background Decoration -->
-    <div class="absolute inset-0 bg-gradient-to-r from-purple-50 to-blue-50 opacity-50"></div>
-    <div class="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full opacity-20 transform translate-x-1/3 -translate-y-1/3"></div>
-    <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-100 rounded-full opacity-20 transform -translate-x-1/3 translate-y-1/3"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50"></div>
+
+    <!-- Animated Shapes -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-200 to-indigo-200 rounded-full opacity-20 transform translate-x-1/3 -translate-y-1/3 floating delay-100"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-br from-blue-200 to-teal-200 rounded-full opacity-20 transform -translate-x-1/3 translate-y-1/3 floating delay-300"></div>
+    <div class="absolute top-1/2 left-1/4 w-32 h-32 bg-gradient-to-br from-pink-200 to-red-200 rounded-full opacity-20 transform -translate-x-1/2 -translate-y-1/2 floating delay-200"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-16">
-            <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full mb-3">TÉMOIGNAGES</span>
+            <span class="inline-block px-4 py-1.5 bg-gradient-to-r from-purple-100 to-indigo-100 text-purple-800 text-sm font-medium rounded-full mb-3 shadow-sm">
+                <i class="fas fa-comment-dots text-purple-500 mr-2"></i>
+                TÉMOIGNAGES
+            </span>
             <h2 class="text-4xl font-bold mb-4 font-poppins">Ce que <span class="text-gradient gradient-purple-blue">disent nos clients</span></h2>
             <p class="text-gray-600 max-w-2xl mx-auto text-lg">Nous sommes fiers des relations que nous avons bâties avec nos clients et des résultats que nous avons obtenus ensemble.</p>
         </div>
 
         <!-- Testimonial Slider Controls -->
-        <div class="flex justify-center mb-12 space-x-2">
-            <button class="w-12 h-12 rounded-full bg-white shadow-sm hover:shadow-md flex items-center justify-center text-gray-600 hover:text-purple-600 transition duration-300 focus:outline-none">
+        <div class="flex justify-center mb-12 space-x-4">
+            <button class="w-14 h-14 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center text-gray-600 hover:text-purple-600 transition duration-300 focus:outline-none transform hover:-translate-y-1">
                 <i class="fas fa-arrow-left"></i>
             </button>
-            <button class="w-12 h-12 rounded-full bg-purple-600 shadow-sm hover:shadow-md flex items-center justify-center text-white hover:bg-purple-700 transition duration-300 focus:outline-none">
+            <button class="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md hover:shadow-lg flex items-center justify-center text-white hover:from-purple-700 hover:to-indigo-700 transition duration-300 focus:outline-none transform hover:-translate-y-1">
                 <i class="fas fa-arrow-right"></i>
             </button>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
             <!-- Testimonial 1 -->
-            <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition duration-300 transform hover:-translate-y-1 reveal reveal-up">
+            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 reveal reveal-up group">
                 <div class="relative mb-8">
-                    <div class="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                    <div class="absolute -top-4 -left-4 w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-quote-left text-xl"></i>
                     </div>
                     <div class="text-yellow-400 text-xl flex justify-end">
@@ -732,20 +518,25 @@
                         <i class="fas fa-star"></i>
                     </div>
                 </div>
-                <p class="text-gray-600 mb-8 italic">"L'équipe de DevCraft a transformé notre présence en ligne. Leur application mobile a augmenté nos ventes de 40% en seulement 3 mois. Leur expertise et leur professionnalisme sont exceptionnels."</p>
+                <p class="text-gray-600 mb-8 italic leading-relaxed">"L'équipe de DevCraft a transformé notre présence en ligne. Leur application mobile a augmenté nos ventes de 40% en seulement 3 mois. Leur expertise et leur professionnalisme sont exceptionnels."</p>
                 <div class="flex items-center">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin" class="w-14 h-14 rounded-full object-cover border-2 border-purple-100 mr-4">
+                    <div class="relative mr-4">
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 animate-pulse opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
+                        <div class="w-16 h-16 rounded-full bg-white border-2 border-white relative z-10 flex items-center justify-center">
+                            <i class="fas fa-user-circle text-purple-500 text-4xl"></i>
+                        </div>
+                    </div>
                     <div>
-                        <h4 class="font-bold text-gray-900">Sophie Martin</h4>
+                        <h4 class="font-bold text-gray-900 group-hover:text-purple-700 transition-colors duration-300">Sophie Martin</h4>
                         <p class="text-purple-600 text-sm font-medium">CEO, FashionHub</p>
                     </div>
                 </div>
             </div>
 
             <!-- Testimonial 2 -->
-            <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition duration-300 transform hover:-translate-y-1 reveal reveal-up delay-100">
+            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 reveal reveal-up delay-100 group">
                 <div class="relative mb-8">
-                    <div class="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                    <div class="absolute -top-4 -left-4 w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-teal-400 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-quote-left text-xl"></i>
                     </div>
                     <div class="text-yellow-400 text-xl flex justify-end">
@@ -756,20 +547,25 @@
                         <i class="fas fa-star"></i>
                     </div>
                 </div>
-                <p class="text-gray-600 mb-8 italic">"Leur approche méthodique et leur expertise en React ont permis de créer une interface utilisateur qui a réduit notre taux de rebond de 60%. Un investissement qui a largement porté ses fruits."</p>
+                <p class="text-gray-600 mb-8 italic leading-relaxed">"Leur approche méthodique et leur expertise en React ont permis de créer une interface utilisateur qui a réduit notre taux de rebond de 60%. Un investissement qui a largement porté ses fruits."</p>
                 <div class="flex items-center">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Thomas Leroy" class="w-14 h-14 rounded-full object-cover border-2 border-blue-100 mr-4">
+                    <div class="relative mr-4">
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-teal-400 animate-pulse opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
+                        <div class="w-16 h-16 rounded-full bg-white border-2 border-white relative z-10 flex items-center justify-center">
+                            <i class="fas fa-user-tie text-blue-500 text-4xl"></i>
+                        </div>
+                    </div>
                     <div>
-                        <h4 class="font-bold text-gray-900">Thomas Leroy</h4>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-700 transition-colors duration-300">Thomas Leroy</h4>
                         <p class="text-blue-600 text-sm font-medium">Directeur Technique, DataVision</p>
                     </div>
                 </div>
             </div>
 
             <!-- Testimonial 3 -->
-            <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition duration-300 transform hover:-translate-y-1 reveal reveal-up delay-200">
+            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 reveal reveal-up delay-200 group">
                 <div class="relative mb-8">
-                    <div class="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                    <div class="absolute -top-4 -left-4 w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-teal-400 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-quote-left text-xl"></i>
                     </div>
                     <div class="text-yellow-400 text-xl flex justify-end">
@@ -780,11 +576,16 @@
                         <i class="fas fa-star-half-alt"></i>
                     </div>
                 </div>
-                <p class="text-gray-600 mb-8 italic">"Leur support après livraison est exceptionnel. Ils ont résolu tous nos problèmes rapidement et ont même formé notre équipe interne. Un partenaire sur qui on peut compter."</p>
+                <p class="text-gray-600 mb-8 italic leading-relaxed">"Leur support après livraison est exceptionnel. Ils ont résolu tous nos problèmes rapidement et ont même formé notre équipe interne. Un partenaire sur qui on peut compter."</p>
                 <div class="flex items-center">
-                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Émilie Dubois" class="w-14 h-14 rounded-full object-cover border-2 border-green-100 mr-4">
+                    <div class="relative mr-4">
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-green-500 to-teal-400 animate-pulse opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
+                        <div class="w-16 h-16 rounded-full bg-white border-2 border-white relative z-10 flex items-center justify-center">
+                            <i class="fas fa-user-graduate text-green-500 text-4xl"></i>
+                        </div>
+                    </div>
                     <div>
-                        <h4 class="font-bold text-gray-900">Émilie Dubois</h4>
+                        <h4 class="font-bold text-gray-900 group-hover:text-green-700 transition-colors duration-300">Émilie Dubois</h4>
                         <p class="text-green-600 text-sm font-medium">Responsable Digital, FitTrack</p>
                     </div>
                 </div>

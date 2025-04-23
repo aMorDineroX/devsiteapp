@@ -1,0 +1,34 @@
+// Main SCSS file that imports all other files
+
+// Abstracts
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+// Vendors
+@import 'vendors/normalize';
+
+// Base
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/animations';
+
+// Layout
+@import 'layout/navigation';
+@import 'layout/grid';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/forms';
+
+// Components
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/testimonials';
+@import 'components/icons';
+
+// Pages
+@import 'pages/home';
+@import 'pages/dashboard';
+
+// Themes
+@import 'themes/default';

@@ -1,0 +1,291 @@
+// Card Base
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: $color-white;
+  background-clip: border-box;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: $shadow;
+  }
+}
+
+// Card with hover effect
+.card-hover-lift {
+  @include hover-lift;
+}
+
+.card-hover-scale {
+  @include hover-scale;
+}
+
+// Card Header
+.card-header {
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0;
+  background-color: $color-white;
+  border-bottom: 1px solid $color-grey-light-3;
+  
+  &:first-child {
+    border-radius: $border-radius-xl $border-radius-xl 0 0;
+  }
+}
+
+// Card Body
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.5rem;
+}
+
+// Card Footer
+.card-footer {
+  padding: 1rem 1.5rem;
+  background-color: $color-grey-light-1;
+  border-top: 1px solid $color-grey-light-3;
+  
+  &:last-child {
+    border-radius: 0 0 $border-radius-xl $border-radius-xl;
+  }
+}
+
+// Card with Image
+.card-img-top {
+  width: 100%;
+  border-top-left-radius: $border-radius-xl;
+  border-top-right-radius: $border-radius-xl;
+}
+
+.card-img-bottom {
+  width: 100%;
+  border-bottom-right-radius: $border-radius-xl;
+  border-bottom-left-radius: $border-radius-xl;
+}
+
+// Card with Border
+.card-border-top {
+  border-top: 4px solid $color-primary;
+}
+
+.card-border-primary {
+  border-top: 4px solid $color-primary;
+}
+
+.card-border-secondary {
+  border-top: 4px solid $color-secondary;
+}
+
+.card-border-success {
+  border-top: 4px solid $color-success;
+}
+
+.card-border-warning {
+  border-top: 4px solid $color-warning;
+}
+
+.card-border-danger {
+  border-top: 4px solid $color-danger;
+}
+
+// Card with Gradient Background
+.card-gradient-primary {
+  @include gradient-primary;
+  color: $color-white;
+}
+
+.card-gradient-secondary {
+  @include gradient-secondary;
+  color: $color-white;
+}
+
+.card-gradient-success {
+  @include gradient-success;
+  color: $color-white;
+}
+
+.card-gradient-warning {
+  @include gradient-warning;
+  color: $color-white;
+}
+
+.card-gradient-danger {
+  @include gradient-danger;
+  color: $color-white;
+}
+
+// Card with Glass Effect
+.card-glass {
+  @include glass-effect;
+}
+
+// Service Card
+.service-card {
+  position: relative;
+  background-color: $color-white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: $shadow-lg;
+  }
+  
+  .service-card-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: $border-radius-circle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    
+    i {
+      font-size: 2rem;
+      transition: all 0.3s ease;
+    }
+  }
+  
+  &:hover .service-card-icon {
+    transform: scale(1.1);
+    
+    i {
+      transform: rotate(10deg);
+    }
+  }
+  
+  .service-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .service-card-description {
+    color: $color-grey-dark-1;
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-card-features {
+    margin-bottom: 1.5rem;
+    
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      
+      i {
+        color: $color-primary;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+// Project Card
+.project-card {
+  position: relative;
+  background-color: $color-white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: $shadow-lg;
+  }
+  
+  .project-card-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+    
+    .project-card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba($color-primary, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .project-card-action {
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+  }
+  
+  &:hover {
+    .project-card-image {
+      img {
+        transform: scale(1.1);
+      }
+      
+      .project-card-overlay {
+        opacity: 1;
+      }
+      
+      .project-card-action {
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  .project-card-content {
+    padding: 1.5rem;
+  }
+  
+  .project-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-card-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: $border-radius;
+    margin-bottom: 1rem;
+  }
+  
+  .project-card-description {
+    color: $color-grey-dark-1;
+    margin-bottom: 1rem;
+  }
+  
+  .project-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: $border-radius-circle;
+      background-color: $color-grey-light-2;
+      color: $color-grey-dark-2;
+    }
+  }
+}

@@ -1,0 +1,224 @@
+// Icon Base
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  font-size: inherit;
+  vertical-align: middle;
+}
+
+// Icon Sizes
+.icon-xs {
+  font-size: 0.75rem;
+}
+
+.icon-sm {
+  font-size: 0.875rem;
+}
+
+.icon-md {
+  font-size: 1rem;
+}
+
+.icon-lg {
+  font-size: 1.25rem;
+}
+
+.icon-xl {
+  font-size: 1.5rem;
+}
+
+.icon-2xl {
+  font-size: 2rem;
+}
+
+.icon-3xl {
+  font-size: 3rem;
+}
+
+.icon-4xl {
+  font-size: 4rem;
+}
+
+.icon-5xl {
+  font-size: 5rem;
+}
+
+// Icon Colors
+.icon-primary {
+  color: $color-primary;
+}
+
+.icon-secondary {
+  color: $color-secondary;
+}
+
+.icon-success {
+  color: $color-success;
+}
+
+.icon-warning {
+  color: $color-warning;
+}
+
+.icon-danger {
+  color: $color-danger;
+}
+
+.icon-white {
+  color: $color-white;
+}
+
+.icon-black {
+  color: $color-black;
+}
+
+.icon-grey {
+  color: $color-grey-dark-1;
+}
+
+// Icon with Background
+.icon-bg {
+  width: 2em;
+  height: 2em;
+  border-radius: $border-radius-circle;
+  background-color: $color-grey-light-1;
+  
+  &.icon-bg-primary {
+    background-color: rgba($color-primary, 0.1);
+    color: $color-primary;
+  }
+  
+  &.icon-bg-secondary {
+    background-color: rgba($color-secondary, 0.1);
+    color: $color-secondary;
+  }
+  
+  &.icon-bg-success {
+    background-color: rgba($color-success, 0.1);
+    color: $color-success;
+  }
+  
+  &.icon-bg-warning {
+    background-color: rgba($color-warning, 0.1);
+    color: $color-warning;
+  }
+  
+  &.icon-bg-danger {
+    background-color: rgba($color-danger, 0.1);
+    color: $color-danger;
+  }
+}
+
+// Icon with Border
+.icon-border {
+  border: 1px solid currentColor;
+  padding: 0.5em;
+  border-radius: $border-radius-circle;
+}
+
+// Icon with Gradient Background
+.icon-gradient-primary {
+  @include gradient-primary;
+  color: $color-white;
+  border-radius: $border-radius-circle;
+  width: 2em;
+  height: 2em;
+}
+
+.icon-gradient-secondary {
+  @include gradient-secondary;
+  color: $color-white;
+  border-radius: $border-radius-circle;
+  width: 2em;
+  height: 2em;
+}
+
+.icon-gradient-success {
+  @include gradient-success;
+  color: $color-white;
+  border-radius: $border-radius-circle;
+  width: 2em;
+  height: 2em;
+}
+
+.icon-gradient-warning {
+  @include gradient-warning;
+  color: $color-white;
+  border-radius: $border-radius-circle;
+  width: 2em;
+  height: 2em;
+}
+
+.icon-gradient-danger {
+  @include gradient-danger;
+  color: $color-white;
+  border-radius: $border-radius-circle;
+  width: 2em;
+  height: 2em;
+}
+
+// Icon with Shadow
+.icon-shadow {
+  box-shadow: $shadow;
+}
+
+// Icon with Animation
+.icon-spin {
+  animation: spin 2s linear infinite;
+}
+
+.icon-pulse {
+  animation: pulse 2s infinite;
+}
+
+.icon-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+// Icon with Hover Effects
+.icon-hover-rotate {
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: rotate(15deg);
+  }
+}
+
+.icon-hover-scale {
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+// Tech Icons
+.tech-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: $color-white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-sm;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: $shadow;
+    transform: translateY(-5px) scale(1.05);
+  }
+  
+  .icon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .tech-name {
+    font-weight: 500;
+    color: $color-grey-dark-2;
+  }
+}

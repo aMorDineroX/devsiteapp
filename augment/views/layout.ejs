@@ -88,40 +88,98 @@
 
     <script src="/js/main.js"></script>
     <script src="/js/animations.js"></script>
+    <script src="/js/debug.js"></script>
     <script>
         // Initialize animations when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing animations...');
+
             // Initialize scroll reveal animations
-            if (typeof initScrollReveal === 'function') initScrollReveal();
+            try {
+                if (typeof window.DevCraftAnimations !== 'undefined' && typeof window.DevCraftAnimations.initScrollReveal === 'function') {
+                    console.log('Initializing scroll reveal...');
+                    window.DevCraftAnimations.initScrollReveal();
+                } else if (typeof initScrollReveal === 'function') {
+                    console.log('Initializing scroll reveal (global)...');
+                    initScrollReveal();
+                }
+            } catch (e) {
+                console.error('Error initializing scroll reveal:', e);
+            }
 
             // Initialize particle animation
-            if (typeof initParticles === 'function') initParticles();
+            try {
+                if (typeof window.DevCraftAnimations !== 'undefined' && typeof window.DevCraftAnimations.initParticles === 'function') {
+                    console.log('Initializing particles...');
+                    window.DevCraftAnimations.initParticles();
+                } else if (typeof initParticles === 'function') {
+                    console.log('Initializing particles (global)...');
+                    initParticles();
+                }
+            } catch (e) {
+                console.error('Error initializing particles:', e);
+            }
 
             // Initialize counters
-            if (typeof initCounters === 'function') initCounters();
+            try {
+                if (typeof window.DevCraftAnimations !== 'undefined' && typeof window.DevCraftAnimations.initCounters === 'function') {
+                    console.log('Initializing counters...');
+                    window.DevCraftAnimations.initCounters();
+                } else if (typeof initCounters === 'function') {
+                    console.log('Initializing counters (global)...');
+                    initCounters();
+                }
+            } catch (e) {
+                console.error('Error initializing counters:', e);
+            }
 
             // Initialize staggered animations
-            if (typeof initStaggeredAnimations === 'function') initStaggeredAnimations();
-
-            // Initialize parallax effect
-            if (typeof initParallax === 'function') initParallax();
-
-            // Initialize typing effect
-            if (typeof initTypingEffect === 'function') initTypingEffect();
+            try {
+                if (typeof window.DevCraftAnimations !== 'undefined' && typeof window.DevCraftAnimations.initStaggeredAnimations === 'function') {
+                    console.log('Initializing staggered animations...');
+                    window.DevCraftAnimations.initStaggeredAnimations();
+                } else if (typeof initStaggeredAnimations === 'function') {
+                    console.log('Initializing staggered animations (global)...');
+                    initStaggeredAnimations();
+                }
+            } catch (e) {
+                console.error('Error initializing staggered animations:', e);
+            }
 
             // Initialize FAQ accordions
-            const faqToggles = document.querySelectorAll('.faq-toggle');
-            if (faqToggles.length > 0) {
-                faqToggles.forEach(toggle => {
-                    toggle.addEventListener('click', function() {
-                        const content = this.nextElementSibling;
-                        const icon = this.querySelector('i');
-                        content.classList.toggle('hidden');
-                        icon.classList.toggle('transform');
-                        icon.classList.toggle('rotate-180');
-                    });
-                });
+            try {
+                if (typeof window.DevCraftAnimations !== 'undefined' && typeof window.DevCraftAnimations.initFaqAccordions === 'function') {
+                    console.log('Initializing FAQ accordions...');
+                    window.DevCraftAnimations.initFaqAccordions();
+                } else {
+                    console.log('Initializing FAQ accordions (manual)...');
+                    const faqToggles = document.querySelectorAll('.faq-toggle');
+                    if (faqToggles.length > 0) {
+                        faqToggles.forEach(toggle => {
+                            toggle.addEventListener('click', function() {
+                                const content = this.nextElementSibling;
+                                const icon = this.querySelector('i');
+                                content.classList.toggle('hidden');
+                                icon.classList.toggle('transform');
+                                icon.classList.toggle('rotate-180');
+                            });
+                        });
+                    }
+                }
+            } catch (e) {
+                console.error('Error initializing FAQ accordions:', e);
             }
+
+            // Manually activate reveal elements if needed
+            setTimeout(function() {
+                const revealElements = document.querySelectorAll('.reveal');
+                if (revealElements.length > 0) {
+                    console.log('Manually activating reveal elements...');
+                    revealElements.forEach(element => {
+                        element.classList.add('active');
+                    });
+                }
+            }, 500);
         });
     </script>
 

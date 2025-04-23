@@ -2,28 +2,8 @@
  * Advanced Animations for DevCraft
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize scroll reveal animations
-    initScrollReveal();
-
-    // Initialize particle animation
-    initParticles();
-
-    // Initialize counters
-    initCounters();
-
-    // Initialize staggered animations
-    initStaggeredAnimations();
-
-    // Initialize parallax effect
-    initParallax();
-
-    // Initialize typing effect
-    initTypingEffect();
-
-    // Initialize FAQ accordions
-    initFaqAccordions();
-});
+// We'll initialize these functions from layout.ejs
+// to ensure they're called after all DOM elements are loaded
 
 /**
  * Initialize scroll reveal animations

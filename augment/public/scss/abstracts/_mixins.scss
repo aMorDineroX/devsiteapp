@@ -1,0 +1,145 @@
+// Media Query Manager
+@mixin respond($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: $breakpoint-sm - 1) { @content };
+  }
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content };
+  }
+  @if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content };
+  }
+  @if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content };
+  }
+  @if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content };
+  }
+  @if $breakpoint == xxl {
+    @media (min-width: $breakpoint-xxl) { @content };
+  }
+}
+
+// Flexbox
+@mixin flex {
+  display: flex;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// Position
+@mixin position-absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin position-fixed-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Gradients
+@mixin gradient-primary {
+  background-image: linear-gradient(135deg, $color-primary, $color-primary-light);
+}
+
+@mixin gradient-secondary {
+  background-image: linear-gradient(135deg, $color-secondary, $color-secondary-light);
+}
+
+@mixin gradient-tertiary {
+  background-image: linear-gradient(135deg, $color-tertiary, $color-tertiary-light);
+}
+
+@mixin gradient-success {
+  background-image: linear-gradient(135deg, $color-success, $color-success-light);
+}
+
+@mixin gradient-warning {
+  background-image: linear-gradient(135deg, $color-warning, $color-warning-light);
+}
+
+@mixin gradient-danger {
+  background-image: linear-gradient(135deg, $color-danger, $color-danger-light);
+}
+
+// Text Gradient
+@mixin text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+// Animations
+@mixin animation($name, $duration: 1s, $timing-function: ease, $delay: 0s, $iteration-count: 1, $direction: normal, $fill-mode: forwards) {
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-timing-function: $timing-function;
+  animation-delay: $delay;
+  animation-iteration-count: $iteration-count;
+  animation-direction: $direction;
+  animation-fill-mode: $fill-mode;
+}
+
+// Transitions
+@mixin transition($property: all, $duration: 0.3s, $timing-function: ease, $delay: 0s) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing-function;
+  transition-delay: $delay;
+}
+
+// Glass Effect
+@mixin glass-effect {
+  background: rgba($color-white, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba($color-white, 0.2);
+}
+
+// Shadow Effects
+@mixin shadow-hover {
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+@mixin shadow-glow($color: $color-primary, $opacity: 0.3) {
+  box-shadow: 0 0 15px rgba($color, $opacity);
+}
+
+// Transform Effects
+@mixin hover-lift {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: translateY(-10px);
+  }
+}
+
+@mixin hover-scale {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}

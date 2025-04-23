@@ -1,0 +1,87 @@
+// Colors
+$color-primary: #6e8efb;
+$color-primary-light: #a777e3;
+$color-primary-dark: #5a6acf;
+
+$color-secondary: #2193b0;
+$color-secondary-light: #6dd5ed;
+$color-secondary-dark: #1a7a8f;
+
+$color-tertiary: #ff8008;
+$color-tertiary-light: #fd2c72;
+$color-tertiary-dark: #e67300;
+
+$color-success: #11998e;
+$color-success-light: #38ef7d;
+$color-success-dark: #0e7c75;
+
+$color-warning: #ee0979;
+$color-warning-light: #ff6a00;
+$color-warning-dark: #c50864;
+
+$color-danger: #8e2de2;
+$color-danger-light: #e94057;
+$color-danger-dark: #7525b9;
+
+$color-grey-light-1: #f8f9fa;
+$color-grey-light-2: #e9ecef;
+$color-grey-light-3: #dee2e6;
+$color-grey-light-4: #ced4da;
+
+$color-grey-dark-1: #6c757d;
+$color-grey-dark-2: #495057;
+$color-grey-dark-3: #343a40;
+$color-grey-dark-4: #212529;
+
+$color-white: #fff;
+$color-black: #000;
+
+// Font
+$default-font-size: 1.6rem;
+$font-primary: 'Poppins', sans-serif;
+$font-secondary: 'Inter', sans-serif;
+
+// Breakpoints
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Shadows
+$shadow-sm: 0 .125rem .25rem rgba($color-black, .075);
+$shadow: 0 .5rem 1rem rgba($color-black, .15);
+$shadow-lg: 0 1rem 3rem rgba($color-black, .175);
+
+// Border Radius
+$border-radius-sm: .2rem;
+$border-radius: .25rem;
+$border-radius-lg: .3rem;
+$border-radius-xl: .5rem;
+$border-radius-2xl: 1rem;
+$border-radius-circle: 50%;
+
+// Z-index
+$z-index-negative: -1;
+$z-index-0: 0;
+$z-index-1: 1;
+$z-index-2: 2;
+$z-index-3: 3;
+$z-index-4: 4;
+$z-index-5: 5;
+$z-index-10: 10;
+$z-index-100: 100;
+$z-index-1000: 1000;
+
+// Animation
+$animation-duration-fast: 0.3s;
+$animation-duration-normal: 0.5s;
+$animation-duration-slow: 0.8s;
+$animation-duration-very-slow: 1.5s;
+
+$animation-timing-ease: ease;
+$animation-timing-ease-in: ease-in;
+$animation-timing-ease-out: ease-out;
+$animation-timing-ease-in-out: ease-in-out;
+$animation-timing-linear: linear;

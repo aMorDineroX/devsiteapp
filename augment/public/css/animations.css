@@ -1,17 +1,19 @@
 /* Advanced Animations */
 
 /* Floating Animation */
+
 .floating {
   animation: floating 3s ease-in-out infinite;
 }
 
 @keyframes floating {
-  0% { transform: translateY(0px); }
+  0% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+  100% { transform: translateY(0); }
 }
 
 /* Pulse Animation */
+
 .pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -22,15 +24,18 @@
 }
 
 /* Bounce Animation */
+
 .bounce {
   animation: bounce 1s infinite;
 }
 
 @keyframes bounce {
+
   0%, 100% {
     transform: translateY(0);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
+
   50% {
     transform: translateY(-25%);
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
@@ -38,39 +43,47 @@
 }
 
 /* Spin Animation */
+
 .spin {
   animation: spin 20s linear infinite;
 }
 
 @keyframes spin {
+
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
 /* Slow Spin Animation */
+
 .spin-slow {
   animation: spin 30s linear infinite;
 }
 
 /* Reverse Spin Animation */
+
 .spin-reverse {
   animation: spin-reverse 20s linear infinite;
 }
 
 @keyframes spin-reverse {
+
   from {
     transform: rotate(360deg);
   }
+
   to {
     transform: rotate(0deg);
   }
 }
 
 /* Fade In Animation */
+
 .fade-in {
   animation: fadeIn 1s ease-in forwards;
 }
@@ -81,15 +94,18 @@
 }
 
 /* Slide Up Animation */
+
 .slide-up {
   animation: slideUp 1s ease-out forwards;
 }
 
 @keyframes slideUp {
+
   0% {
     opacity: 0;
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -97,15 +113,18 @@
 }
 
 /* Slide In Left Animation */
+
 .slide-in-left {
   animation: slideInLeft 1s ease-out forwards;
 }
 
 @keyframes slideInLeft {
+
   0% {
     opacity: 0;
     transform: translateX(-50px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -113,15 +132,18 @@
 }
 
 /* Slide In Right Animation */
+
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
 }
 
 @keyframes slideInRight {
+
   0% {
     opacity: 0;
     transform: translateX(50px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -129,6 +151,7 @@
 }
 
 /* Scale Animation */
+
 .scale {
   animation: scale 2s ease-in-out infinite;
 }
@@ -139,6 +162,7 @@
 }
 
 /* Typing Animation */
+
 .typing {
   overflow: hidden;
   border-right: .15em solid var(--primary-color);
@@ -155,71 +179,84 @@
 }
 
 @keyframes blink-caret {
-  from, to { border-color: transparent }
+  0%, 100% { border-color: transparent }
   50% { border-color: var(--primary-color); }
 }
 
 /* Staggered Animation for Lists */
+
 .staggered-list .staggered-item {
   opacity: 0;
   animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 /* Gradient Animation */
+
 .gradient-animate {
   background-size: 200% 200%;
   animation: gradientAnimation 5s ease infinite;
 }
 
 @keyframes gradientAnimation {
+
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
 /* Blob Animation */
+
 .blob {
   animation: blob 7s infinite;
 }
 
 @keyframes blob {
+
   0% {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
+
   50% {
     border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
   }
+
   100% {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
 }
 
 /* Shimmer Effect */
+
 .shimmer {
   background: linear-gradient(90deg, 
-    rgba(255,255,255,0) 0%, 
-    rgba(255,255,255,0.2) 50%, 
-    rgba(255,255,255,0) 100%);
+    rgb(255 255 255 / 0%) 0%, 
+    rgb(255 255 255 / 20%) 50%, 
+    rgb(255 255 255 / 0%) 100%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
+
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
 }
 
 /* Parallax Effect Classes */
+
 .parallax-bg {
   background-attachment: fixed;
   background-position: center;
@@ -228,6 +265,7 @@
 }
 
 /* Scroll Reveal Animation */
+
 .reveal {
   position: relative;
   opacity: 0;
@@ -271,6 +309,7 @@
 }
 
 /* Delay Classes */
+
 .delay-100 {
   animation-delay: 0.1s;
 }
@@ -300,6 +339,7 @@
 }
 
 /* Duration Classes */
+
 .duration-300 {
   animation-duration: 0.3s;
 }
@@ -325,6 +365,7 @@
 }
 
 /* Shapes for background decoration */
+
 .shape {
   position: absolute;
   z-index: 0;
@@ -351,6 +392,7 @@
 }
 
 /* Particle Animation */
+
 .particles {
   position: absolute;
   top: 0;
@@ -371,16 +413,20 @@
 }
 
 @keyframes particleAnimation {
+
   0% {
     transform: translateY(0) translateX(0);
     opacity: 0;
   }
+
   10% {
     opacity: 0.5;
   }
+
   90% {
     opacity: 0.5;
   }
+
   100% {
     transform: translateY(-1000px) translateX(100px);
     opacity: 0;
@@ -388,6 +434,7 @@
 }
 
 /* Modern Gradient Backgrounds */
+
 .gradient-purple-blue {
   background: linear-gradient(135deg, #6e8efb, #a777e3);
 }
@@ -417,24 +464,26 @@
 }
 
 /* Glass Morphism */
+
 .glass {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 10%);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(255 255 255 / 20%);
 }
 
 .glass-dark {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgb(0 0 0 / 10%);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(255 255 255 / 10%);
 }
 
 /* Neumorphism */
+
 .neumorphism-light {
   background: #f0f0f3;
-  box-shadow: 10px 10px 20px #d1d1d4, -10px -10px 20px #ffffff;
+  box-shadow: 10px 10px 20px #d1d1d4, -10px -10px 20px #fff;
 }
 
 .neumorphism-dark {
@@ -443,6 +492,7 @@
 }
 
 /* 3D Transform */
+
 .transform-3d {
   transform-style: preserve-3d;
   perspective: 1000px;
@@ -457,6 +507,7 @@
 }
 
 /* Hover Effects */
+
 .hover-lift {
   transition: transform 0.3s ease;
 }
@@ -486,20 +537,21 @@
 }
 
 .hover-shadow:hover {
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 10%), 0 10px 10px -5px rgb(0 0 0 / 4%);
 }
 
 /* Text Effects */
+
 .text-gradient {
   background-clip: text;
-  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 }
 
 .text-shadow {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 30%);
 }
 
 .text-glow {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 10px rgb(255 255 255 / 80%), 0 0 20px rgb(255 255 255 / 80%);
 }

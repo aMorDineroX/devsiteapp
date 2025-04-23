@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Tailwind CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .gradient-purple-blue {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+        }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">Test des composants UI</h1>
+
+        <!-- Test Card -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+            <div class="md:flex">
+                <div class="md:shrink-0">
+                    <div class="h-48 w-full gradient-purple-blue md:h-full md:w-48 flex items-center justify-center text-white text-4xl">
+                        <i class="fas fa-star floating"></i>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Test Tailwind CSS</div>
+                    <h2 class="mt-2 text-xl font-semibold">Si cette carte s'affiche correctement avec des styles, alors Tailwind CSS fonctionne.</h2>
+                    <p class="mt-2 text-slate-500">Ceci est un test pour vérifier si les styles Tailwind CSS et les animations sont correctement appliqués.</p>
+                    <button class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">Bouton de test</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Gradient Text -->
+        <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Test de texte avec dégradé</h2>
+            <p class="text-xl">
+                Ceci est un texte avec un <span class="text-gradient gradient-purple-blue font-bold">dégradé de couleur</span> appliqué.
+            </p>
+        </div>
+
+        <!-- Test Icons -->
+        <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Test des icônes Font Awesome</h2>
+            <div class="flex space-x-8 justify-center">
+                <div class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center text-blue-500 text-3xl">
+                    <i class="fab fa-react"></i>
+                </div>
+                <div class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center text-green-600 text-3xl">
+                    <i class="fab fa-node-js"></i>
+                </div>
+                <div class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center text-green-500 text-3xl">
+                    <i class="fab fa-vuejs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Animation -->
+        <div class="bg-white rounded-xl shadow-md p-8">
+            <h2 class="text-2xl font-bold mb-4">Test d'animation</h2>
+            <div class="flex justify-center">
+                <div class="w-24 h-24 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full floating flex items-center justify-center text-white text-3xl">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation test
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test page loaded');
+        });
+    </script>
+</body>
+</html>

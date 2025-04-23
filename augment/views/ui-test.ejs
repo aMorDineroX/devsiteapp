@@ -1,0 +1,279 @@
+<%- include('layout', { title: 'Test des composants UI', extraCSS: '', extraJS: '' }) %>
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8 text-center">Test des composants UI</h1>
+    
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2">Boutons</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Boutons standards</h3>
+                <div class="space-y-2">
+                    <button class="btn btn-primary">Bouton primaire</button>
+                    <button class="btn btn-secondary">Bouton secondaire</button>
+                    <button class="btn btn-success">Bouton succès</button>
+                    <button class="btn btn-warning">Bouton alerte</button>
+                    <button class="btn btn-danger">Bouton danger</button>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Boutons avec contour</h3>
+                <div class="space-y-2">
+                    <button class="btn btn-outline-primary">Contour primaire</button>
+                    <button class="btn btn-outline-secondary">Contour secondaire</button>
+                    <button class="bg-purple-600 btn btn-outline-white">Contour blanc</button>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Boutons avec icônes</h3>
+                <div class="space-y-2">
+                    <button class="btn btn-primary btn-icon"><i class="fas fa-save"></i> Enregistrer</button>
+                    <button class="btn btn-secondary btn-icon"><i class="fas fa-trash"></i> Supprimer</button>
+                    <button class="btn btn-success btn-icon"><i class="fas fa-check"></i> Valider</button>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Tailles de boutons</h3>
+                <div class="space-y-2">
+                    <button class="btn btn-primary btn-sm">Petit</button>
+                    <button class="btn btn-primary">Normal</button>
+                    <button class="btn btn-primary btn-lg">Grand</button>
+                    <button class="btn btn-primary btn-xl">Très grand</button>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Boutons arrondis</h3>
+                <div class="space-y-2">
+                    <button class="btn btn-primary btn-rounded">Arrondi primaire</button>
+                    <button class="btn btn-secondary btn-rounded">Arrondi secondaire</button>
+                    <button class="btn btn-success btn-rounded">Arrondi succès</button>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Effets au survol</h3>
+                <div class="space-y-2">
+                    <button class="btn btn-primary btn-hover-lift">Effet élévation</button>
+                    <button class="btn btn-secondary btn-hover-scale">Effet échelle</button>
+                    <button class="btn btn-success btn-shadow">Effet ombre</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2">Icônes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Tailles d'icônes</h3>
+                <div class="flex items-end space-x-4">
+                    <i class="icon icon-xs fas fa-star"></i>
+                    <i class="icon icon-sm fas fa-star"></i>
+                    <i class="icon icon-md fas fa-star"></i>
+                    <i class="icon icon-lg fas fa-star"></i>
+                    <i class="icon icon-xl fas fa-star"></i>
+                    <i class="icon icon-2xl fas fa-star"></i>
+                    <i class="icon icon-3xl fas fa-star"></i>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Couleurs d'icônes</h3>
+                <div class="flex space-x-4">
+                    <i class="icon icon-2xl icon-primary fas fa-heart"></i>
+                    <i class="icon icon-2xl icon-secondary fas fa-heart"></i>
+                    <i class="icon icon-2xl icon-success fas fa-heart"></i>
+                    <i class="icon icon-2xl icon-warning fas fa-heart"></i>
+                    <i class="icon icon-2xl icon-danger fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Icônes avec fond</h3>
+                <div class="flex space-x-4">
+                    <i class="icon icon-2xl icon-bg icon-bg-primary fas fa-user"></i>
+                    <i class="icon icon-2xl icon-bg icon-bg-secondary fas fa-user"></i>
+                    <i class="icon icon-2xl icon-bg icon-bg-success fas fa-user"></i>
+                    <i class="icon icon-2xl icon-bg icon-bg-warning fas fa-user"></i>
+                    <i class="icon icon-2xl icon-bg icon-bg-danger fas fa-user"></i>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Icônes avec dégradé</h3>
+                <div class="flex space-x-4">
+                    <i class="icon icon-2xl icon-gradient-primary fas fa-rocket"></i>
+                    <i class="icon icon-2xl icon-gradient-secondary fas fa-rocket"></i>
+                    <i class="icon icon-2xl icon-gradient-success fas fa-rocket"></i>
+                    <i class="icon icon-2xl icon-gradient-warning fas fa-rocket"></i>
+                    <i class="icon icon-2xl icon-gradient-danger fas fa-rocket"></i>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Icônes avec animations</h3>
+                <div class="flex space-x-4">
+                    <i class="icon icon-2xl icon-primary icon-spin fas fa-spinner"></i>
+                    <i class="icon icon-2xl icon-secondary icon-pulse fas fa-heart"></i>
+                    <i class="icon icon-2xl icon-success icon-float fas fa-paper-plane"></i>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Icônes avec effets au survol</h3>
+                <div class="flex space-x-4">
+                    <i class="icon icon-2xl icon-primary icon-hover-rotate fas fa-cog"></i>
+                    <i class="icon icon-2xl icon-secondary icon-hover-scale fas fa-bell"></i>
+                    <i class="icon icon-2xl icon-success icon-shadow fas fa-check-circle"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2">Animations</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation flottante</h3>
+                <div class="flex justify-center">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full floating flex items-center justify-center text-white">
+                        <i class="fas fa-rocket text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation pulsation</h3>
+                <div class="flex justify-center">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full pulse flex items-center justify-center text-white">
+                        <i class="fas fa-heart text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation rebond</h3>
+                <div class="flex justify-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-full bounce flex items-center justify-center text-white">
+                        <i class="fas fa-basketball-ball text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation rotation</h3>
+                <div class="flex justify-center">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center text-white">
+                        <i class="fas fa-sync text-2xl spin-slow"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation blob</h3>
+                <div class="flex justify-center">
+                    <div class="w-16 h-16 bg-pink-500 blob flex items-center justify-center text-white">
+                        <i class="fas fa-atom text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation révélation</h3>
+                <div class="flex justify-center">
+                    <div class="w-16 h-16 bg-indigo-500 rounded-full reveal reveal-up flex items-center justify-center text-white">
+                        <i class="fas fa-star text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation défilement</h3>
+                <div class="overflow-hidden">
+                    <div class="flex space-x-4 animate-scroll">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex-shrink-0"></div>
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex-shrink-0"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation dégradé</h3>
+                <div class="flex justify-center">
+                    <div class="w-full h-16 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-lg background-animate"></div>
+                </div>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="font-bold mb-2">Animation machine à écrire</h3>
+                <div class="flex justify-center">
+                    <div class="typewriter">Animation machine à écrire</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2">Cartes et conteneurs</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl mb-2">Carte standard</h3>
+                    <p class="text-gray-600">Une carte simple avec effet d'élévation au survol.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-32 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
+                <div class="p-6">
+                    <h3 class="font-bold text-xl mb-2">Carte avec image</h3>
+                    <p class="text-gray-600">Une carte avec une image en haut.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-blue-500">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl mb-2">Carte avec bordure</h3>
+                    <p class="text-gray-600">Une carte avec une bordure colorée en haut.</p>
+                </div>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl shadow-md overflow-hidden text-white">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl mb-2">Carte avec dégradé</h3>
+                    <p class="text-white text-opacity-80">Une carte avec un arrière-plan en dégradé.</p>
+                </div>
+            </div>
+            <div class="glass rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl mb-2">Carte en verre</h3>
+                    <p>Une carte avec effet de verre (glassmorphism).</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6 border-b">
+                    <h3 class="font-bold text-xl">Carte avec en-tête</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600">Une carte avec un en-tête séparé.</p>
+                </div>
+                <div class="p-4 bg-gray-50 border-t">
+                    <p class="text-gray-500 text-sm">Pied de carte</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Activate reveal elements
+        setTimeout(function() {
+            document.querySelectorAll('.reveal').forEach(element => {
+                element.classList.add('active');
+            });
+        }, 500);
+        
+        // Add glass effect background
+        const glassElements = document.querySelectorAll('.glass');
+        glassElements.forEach(element => {
+            element.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            element.style.backdropFilter = 'blur(10px)';
+            element.style.webkitBackdropFilter = 'blur(10px)';
+            element.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+        });
+    });
+</script>
+
+<%- include('footer') %>
